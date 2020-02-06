@@ -10,9 +10,7 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <HomeComponent />
-        </ScrollView>
+        <HomeComponent />
       </SafeAreaView>
     </>
   );
