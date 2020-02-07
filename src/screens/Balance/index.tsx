@@ -1,15 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/native';
-//components
 import {Button} from 'react-native';
-export const TransfersScreen = ({navigation}) => {
+import {BalanceHeaderComponent} from './components/Header';
+
+export const BalanceScreen = ({navigation}) => {
   return (
-    <Container>
-      <Title>Transfer screen </Title>
-      <Button title="Go home" onPress={() => navigation.navigate('Home')} />
-    </Container>
+    <>
+      <BalanceHeaderComponent assets="0.00" />
+      <Button
+        title="Go tranfers"
+        onPress={() => navigation.push('Transfers')}
+      />
+    </>
   );
 };
+
 const Container = styled.View`
   padding: 22px;
   height: 100%;
@@ -19,4 +24,5 @@ const Container = styled.View`
 const Title = styled.Text`
   font-size: 36px;
   font-weight: bold;
+  margin-bottom: 16px;
 `;
