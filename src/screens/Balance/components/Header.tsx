@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {colors, borderRadius} from '../../../shared/styles/variables';
+import {colors} from '../../../shared/styles/variables';
 import LinearGradient from 'react-native-linear-gradient';
-import {PixelRatio, Dimensions} from 'react-native';
 
 type BalanceHeaderComponentProps = {
   assets: string;
@@ -24,10 +23,10 @@ export const BalanceHeaderComponent: React.FC<BalanceHeaderComponentProps> = ({
 const Container = styled(LinearGradient)`
   justify-content: center;
   align-items: center;
-  height: 55%;
+  height: 40%;
   margin-bottom: 16px;
-  border-bottom-left-radius: 80px;
-  border-bottom-right-radius: 80px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
 `;
 const AssetsContainer = styled.View`
   align-items: flex-start;

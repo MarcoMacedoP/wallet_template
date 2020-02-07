@@ -1,25 +1,39 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {Button} from 'react-native';
+import {Button, StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
+import {BalanceCurrencyComponent} from './components/Currency';
+import {ScrollView} from 'react-native-gesture-handler';
+import {colors} from '../../shared/styles/variables';
 
-export const BalanceScreen = ({navigation}) => {
+export const BalanceScreen = ({navigation, currencys = [1, 2]}) => {
+  const handleCurrencyClick = () => navigation.navigate('Transfers');
+
   return (
     <>
-      <BalanceHeaderComponent assets="0.00" />
-      <Button
-        title="Go tranfers"
-        onPress={() => navigation.push('Transfers')}
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={colors.primaryLigth}
       />
+      <BalanceHeaderComponent assets="0.00" />
+      <CurrencysContainer>
+        {currencys.map(currency => (
+          <BalanceCurrencyComponent
+            key={currency}
+            onClick={handleCurrencyClick}
+          />
+        ))}
+      </CurrencysContainer>
     </>
   );
 };
 
-const Container = styled.View`
+const CurrencysContainer = styled.View`
   padding: 22px;
-  height: 100%;
   width: 100%;
   justify-content: center;
+  position: relative;
+  top: -70px;
 `;
 const Title = styled.Text`
   font-size: 36px;
