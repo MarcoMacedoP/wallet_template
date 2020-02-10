@@ -66,7 +66,13 @@ const App = () => {
             component={BalanceScreen}
             options={balanceOptions}
           />
-          <Screen name="Transfers" component={TransfersScreen} />
+          <Screen
+            name="Transfers"
+            component={TransfersScreen}
+            options={({route}: {route: any}) => ({
+              title: route.params.currency.type,
+            })}
+          />
           <Screen
             name="Walkthrough"
             component={WalkthroughScreen}
