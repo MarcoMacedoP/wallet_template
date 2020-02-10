@@ -11,7 +11,7 @@ import {WalkthroughScreen} from './src/screens/Walkthrough';
 import {BalanceScreen} from './src/screens/Balance';
 import {TransfersScreen} from './src/screens/Transfers';
 import {colors} from './src/shared/styles/variables';
-import {Image} from 'react-native';
+import {LayoutHeader} from './src/shared/components/LayoutHeader';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
@@ -26,7 +26,7 @@ const balanceOptions: StackNavigationOptions = {
     fontWeight: 'bold',
   },
   headerTransparent: true,
-  // headerLeft: <Image source={require('./src/assets/icons/logo_mini.png')} />,
+  headerTitle: props => <LayoutHeader {...props} />,
 };
 
 const walkthroughOptions: StackNavigationOptions = {
@@ -47,7 +47,7 @@ const commonOptions: StackNavigationOptions = {
 const App = () => {
   return (
     <NavigationContainer>
-      <Navigator initialRouteName="Walkthrough" screenOptions={commonOptions}>
+      <Navigator initialRouteName="Home" screenOptions={commonOptions}>
         <Screen
           name="Home"
           component={BalanceScreen}
