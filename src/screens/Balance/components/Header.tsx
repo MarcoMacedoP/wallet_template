@@ -6,28 +6,37 @@ import LinearGradient from 'react-native-linear-gradient';
 type BalanceHeaderComponentProps = {
   assets: string;
 };
-
 export const BalanceHeaderComponent: React.FC<BalanceHeaderComponentProps> = ({
   assets,
 }) => {
   return (
-    <Container
-      colors={[colors.primaryLigth, colors.primary, colors.primaryDark]}>
+    <BackgroundImage
+      source={require('../../../assets/images/agave_background.png')}>
       <AssetsContainer>
         <Title>{assets}</Title>
         <SmallText>$</SmallText>
       </AssetsContainer>
-    </Container>
+    </BackgroundImage>
   );
 };
 const Container = styled(LinearGradient)`
   justify-content: center;
   align-items: center;
-  height: 40%;
-  margin-bottom: 16px;
+
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
 `;
+const BackgroundImage = styled.ImageBackground`
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  margin-bottom: 16px;
+  resize-mode: cover;
+  background-color: blue;
+`;
+
 const AssetsContainer = styled.View`
   align-items: flex-start;
   flex-direction: row;
