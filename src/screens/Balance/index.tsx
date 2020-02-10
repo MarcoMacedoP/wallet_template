@@ -1,12 +1,27 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {Button, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
 import {BalanceCurrencyComponent} from './components/Currency';
-import {ScrollView} from 'react-native-gesture-handler';
-import {colors} from '../../shared/styles/variables';
 
-export const BalanceScreen = ({navigation, currencys = [1, 2]}) => {
+const CURRENCYS: Array<{
+  value: number;
+  type: 'BTC' | 'AGVC';
+  name: string;
+}> = [
+  {
+    type: 'BTC',
+    value: 0.0,
+    name: 'Bitcoin',
+  },
+  {
+    name: 'Agave coin',
+    type: 'AGVC',
+    value: 0.0,
+  },
+];
+
+export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
   const handleCurrencyClick = () => navigation.push('Transfers');
 
   return (
@@ -18,9 +33,12 @@ export const BalanceScreen = ({navigation, currencys = [1, 2]}) => {
       />
       <BalanceHeaderComponent assets="0.00" />
       <CurrencysContainer>
-        {currencys.map(currency => (
+        {currencys.map((currency, index) => (
           <BalanceCurrencyComponent
-            key={currency}
+            type={currency.type}
+            value={currency.value}
+            key={index}
+            name={currency.name}
             onClick={handleCurrencyClick}
           />
         ))}

@@ -5,26 +5,32 @@ import {View, Image} from 'react-native';
 
 type BalanceCurrencyComponentProps = {
   onClick: () => void;
+  type: 'BTC' | 'AGVC';
+  name: string;
+  value: number;
 };
 export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> = props => {
-  const {onClick} = props;
+  const {onClick, type, value, name} = props;
+  console.log(name);
   return (
     <Container onPress={onClick} underlayColor={colors.whiteDark}>
       <InfoContainer>
         <TitleContainer>
           <Image
-            source={{
-              width: 24,
-              height: 24,
-              uri:
-                'https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/bitoin_btc_coin_crypto-512.png',
-            }}
+            source={
+              type === 'BTC'
+                ? require('../../../assets/icons/btc_icon.png')
+                : require('../../../assets/icons/agave_coin_icon.png')
+            }
           />
-          <Title> BTC </Title>
+          <View>
+            <Title> {type}</Title>
+            <Subtitle>{name}</Subtitle>
+          </View>
         </TitleContainer>
         <View>
-          <CurrencyStatus>0.00</CurrencyStatus>
-          <CurrencyInLocal>=$0.00</CurrencyInLocal>
+          <CurrencyStatus>{String(value)}</CurrencyStatus>
+          <CurrencyInLocal>$={value}</CurrencyInLocal>
         </View>
       </InfoContainer>
     </Container>
@@ -54,6 +60,12 @@ const Title = styled.Text`
   font-size: 16px;
   color: ${colors.black};
   margin-left: 8px;
+`;
+const Subtitle = styled(Title)`
+  font-size: 12px;
+  text-transform: capitalize;
+  color: ${colors.blackLigth};
+  padding-left: 4px;
 `;
 const CurrencyStatus = styled(Title)`
   font-weight: bold;

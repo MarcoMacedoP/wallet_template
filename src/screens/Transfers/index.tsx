@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components/native';
 //components
 import {Button} from 'react-native';
+
 export const TransfersScreen = ({navigation}) => {
+  const amount = '0.00';
+
   return (
     <Container>
-      <Title>Transfer screen </Title>
-      <Button title="Go home" onPress={() => navigation.navigate('Home')} />
+      <Title>{amount}</Title>
     </Container>
   );
 };

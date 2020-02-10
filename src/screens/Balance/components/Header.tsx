@@ -27,7 +27,7 @@ const Container = styled.ImageBackground`
   height: 100%;
   justify-content: center;
   align-items: center;
-  height: 40%;
+  height: 35%;
   margin-bottom: 16px;
   resize-mode: cover;
   background-color: ${colors.primary};
@@ -46,9 +46,9 @@ const Title = styled.Text`
   margin: 0 8px;
 `;
 const SmallText = styled.Text`
-  font-size: 14px;
+  font-size: 24px;
   color: ${colors.white};
-  font-weight: bold;
+  font-weight: normal;
   position: relative;
   top: 14px;
 `;
