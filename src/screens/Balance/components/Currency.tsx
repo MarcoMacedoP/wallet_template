@@ -7,7 +7,7 @@ type BalanceCurrencyComponentProps = {
   onClick: () => void;
   type: 'BTC' | 'AGVC';
   name: string;
-  value: number;
+  value: string;
 };
 export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> = props => {
   const {onClick, type, value, name} = props;
@@ -29,7 +29,7 @@ export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> =
           </View>
         </TitleContainer>
         <View>
-          <CurrencyStatus>{String(value)}</CurrencyStatus>
+          <CurrencyStatus>{value}</CurrencyStatus>
           <CurrencyInLocal>$={value}</CurrencyInLocal>
         </View>
       </InfoContainer>

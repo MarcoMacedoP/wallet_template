@@ -3,8 +3,10 @@ import styled from 'styled-components/native';
 //components
 import {Button} from 'react-native';
 
-export const TransfersScreen = ({navigation}) => {
+export const TransfersScreen = ({navigation, route}) => {
   const amount = '0.00';
+  const {currency} = route.params;
+  console.log(currency);
 
   return (
     <Container>

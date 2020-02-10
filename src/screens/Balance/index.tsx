@@ -5,24 +5,25 @@ import {BalanceHeaderComponent} from './components/Header';
 import {BalanceCurrencyComponent} from './components/Currency';
 
 const CURRENCYS: Array<{
-  value: number;
+  value: string;
   type: 'BTC' | 'AGVC';
   name: string;
 }> = [
   {
     type: 'BTC',
-    value: 0.0,
+    value: '0.00',
     name: 'Bitcoin',
   },
   {
     name: 'Agave coin',
     type: 'AGVC',
-    value: 0.0,
+    value: '0.00',
   },
 ];
 
 export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
-  const handleCurrencyClick = () => navigation.push('Transfers');
+  const handleCurrencyClick = currency =>
+    navigation.navigate('Transfers', {currency});
 
   return (
     <>
@@ -39,7 +40,7 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
             value={currency.value}
             key={index}
             name={currency.name}
-            onClick={handleCurrencyClick}
+            onClick={() => handleCurrencyClick(currency)}
           />
         ))}
       </CurrencysContainer>
