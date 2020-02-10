@@ -10,6 +10,8 @@ import React from 'react';
 import {WalkthroughScreen} from './src/screens/Walkthrough';
 import {BalanceScreen} from './src/screens/Balance';
 import {TransfersScreen} from './src/screens/Transfers';
+import {TermsScreen} from './src/screens/Terms';
+
 import {colors} from './src/shared/styles/variables';
 import {LayoutHeader} from './src/shared/components/LayoutHeader';
 import {SafeAreaView, View} from 'react-native';
@@ -29,10 +31,24 @@ const balanceOptions: StackNavigationOptions = {
   },
   headerTransparent: true,
   headerTitle: props => <LayoutHeader {...props} />,
+  headerBackTitleVisible: false,
+  headerLeft: null,
+};
+
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
 };
 
 const walkthroughOptions: StackNavigationOptions = {
-  headerShown: false
+  headerShown: false,
 };
 
 const commonOptions: StackNavigationOptions = {
@@ -44,7 +60,7 @@ const App = () => {
   return (
     <>
       <NavigationContainer>
-        <Navigator initialRouteName="Home" screenOptions={commonOptions}>
+        <Navigator initialRouteName="Walkthrough" screenOptions={commonOptions} mode="card">
           <Screen
             name="Home"
             component={BalanceScreen}
@@ -60,6 +76,25 @@ const App = () => {
             name="Notifications"
             component={NotificationsScreen}
             options={{title: 'Notification Center'}}
+          />
+          <Screen
+            name="Terms"
+            component={TermsScreen}
+            options={{
+              title: 'User service Agreement',
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontSize: 16,
+                fontWeight: 'normal',
+              },
+              transitionSpec: {
+                open: config,
+                close: config,
+              },
+              gestureEnabled: true,
+              gestureResponseDistance: 'horizontal',
+              gestureDirection: 'vertical-inverted'
+            }}
           />
         </Navigator>
       </NavigationContainer>

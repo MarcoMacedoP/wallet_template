@@ -8,24 +8,22 @@ import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 export const WalkthroughScreen = ({ navigation }) => {
     const [count, setCount] = useState(1);
 
-
     var image = require('../../assets/tutorial/tutorial_one.png');
     var image2 = require('../../assets/tutorial/tutorial_two.png');
     var image3 = require('../../assets/tutorial/tutorial_three.png');
-    var title = "Multi-chain Wallet";
-    var label = "Supporting BTC, AgaveCoin,etc.";
+
     const next = () => {
         count !== 3 && setCount(count + 1 )
     };
     const back = () => {
-      count !== 0 && setCount(count - 1);
+      count !== 1 && setCount(count - 1);
     };
 
-    const onSwipeLeft = (gestureState) => {
+    const onSwipeLeft = () => {
         next();
     }
  
-    const onSwipeRight = (gestureState) => {
+    const onSwipeRight = () => {
         back();
     }
 
@@ -51,8 +49,30 @@ export const WalkthroughScreen = ({ navigation }) => {
         </GestureRecognizer>
         <BodyBox>
           <ContainerText>
-            <Title>{title}</Title>
-            <Label>{label}</Label>
+            {count == 1 ? 
+              <Title>Multi-chain Wallet</Title>
+            : null}
+            {count == 1 ? 
+              <Label>Supporting BTC, AgaveCoin,etc.</Label>
+              : null}
+            {count == 1 ? 
+              <Label>AgaveCoin,etc.</Label>
+              : null}
+            {count == 2 ?
+              <Title>Designed for Simplicity </Title>
+              : null}
+            {count == 2 ?
+              <Label>Add and manage cryptocurrencies with one click
+              Manage multiple addresses easily</Label>
+              : null}
+            {count == 3 ?
+              <Title>Agave Coin Secure  </Title>
+              : null}
+            {count == 3 ?
+              <Label>Full control over assets by managing private 
+              keys independently. Produced by Agave Coin
+              security team</Label>
+              : null}
           </ContainerText>
           <ContainerButtons>
             <View style={styles.dotBox}>
@@ -62,10 +82,11 @@ export const WalkthroughScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity
               style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
-              onPress={next}>
+              onPress={() => navigation.navigate('Terms')}>
               <Text style={{color: 'white', fontSize: 18}}>Create Wallet</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => navigation.navigate('Terms')}
               style={[{height: 50, backgroundColor: '#50CDD5'}, styles.button]}>
               <Text style={{color: 'white', fontSize: 18}}>Import Wallet</Text>
             </TouchableOpacity>
@@ -79,7 +100,7 @@ const Container = styled.View`
   padding: 22px;
   height: 100%;
   width: 100%;
-  flexDirection: column;
+  flex-direction: column;
   justify-content: space-between;
 `;
 const BodyBox = styled.View`
@@ -108,7 +129,8 @@ const ContainerButtons = styled.View`
   width: 100%;
 `;
 const Title = styled.Text`
-  font-size: 36px;
+  font-size: 30px;
+  margin-bottom: 5px;
   font-weight: bold;
   text-align: center;
 `;
