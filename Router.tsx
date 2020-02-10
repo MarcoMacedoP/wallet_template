@@ -12,6 +12,8 @@ import {BalanceScreen} from './src/screens/Balance';
 import {TransfersScreen} from './src/screens/Transfers';
 import {colors} from './src/shared/styles/variables';
 import {LayoutHeader} from './src/shared/components/LayoutHeader';
+import {SafeAreaView, View} from 'react-native';
+import {NotificationsScreen} from './src/screens/Notifications/Notifications';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
@@ -46,21 +48,24 @@ const commonOptions: StackNavigationOptions = {
 };
 const App = () => {
   return (
-    <NavigationContainer>
-      <Navigator initialRouteName="Home" screenOptions={commonOptions}>
-        <Screen
-          name="Home"
-          component={BalanceScreen}
-          options={balanceOptions}
-        />
-        <Screen name="Transfers" component={TransfersScreen} />
-        <Screen
-          name="Walkthrough"
-          component={WalkthroughScreen}
-          options={walkthroughOptions}
-        />
-      </Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Navigator initialRouteName="Home" screenOptions={commonOptions}>
+          <Screen
+            name="Home"
+            component={BalanceScreen}
+            options={balanceOptions}
+          />
+          <Screen name="Transfers" component={TransfersScreen} />
+          <Screen
+            name="Walkthrough"
+            component={WalkthroughScreen}
+            options={walkthroughOptions}
+          />
+          <Screen name="Notifications" component={NotificationsScreen} />
+        </Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
