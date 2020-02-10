@@ -10,7 +10,7 @@ export const TransfersScreen = ({navigation, route}) => {
 
   return (
     <Container>
-      <Title>{amount}</Title>
+      <Title>{currency.value}</Title>
     </Container>
   );
 };
