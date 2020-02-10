@@ -13,7 +13,8 @@ export const BalanceScreen = ({navigation, currencys = [1, 2]}) => {
     <>
       <StatusBar
         barStyle="light-content"
-        backgroundColor={colors.primaryLigth}
+        translucent
+        backgroundColor="transparent"
       />
       <BalanceHeaderComponent assets="0.00" />
       <CurrencysContainer>
