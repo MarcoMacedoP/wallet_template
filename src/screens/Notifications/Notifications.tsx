@@ -1,28 +1,22 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import {TabBar} from '../../shared/components/TabBar';
-
-const FirstRoute = () => (
-  <View style={[styles.scene, {backgroundColor: '#ff4081'}]} />
-);
-
-const SecondRoute = () => (
-  <View style={[styles.scene, {backgroundColor: '#673ab7'}]} />
-);
+import {TransferMessages} from './components/TransferMessages';
+import {SystemMessages} from './components/SystemMessages';
 
 const initialLayout = {width: Dimensions.get('window').width};
 
 export function NotificationsScreen() {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'first', title: 'First'},
-    {key: 'second', title: 'Second'},
+    {key: 'first', title: 'Transfer Messages'},
+    {key: 'second', title: 'System Messages'},
   ]);
 
   const renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
+    first: TransferMessages,
+    second: SystemMessages,
   });
 
   return (

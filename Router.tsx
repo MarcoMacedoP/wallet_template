@@ -45,6 +45,7 @@ const walkthroughOptions: StackNavigationOptions = {
 const commonOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
   animationTypeForReplace: 'push',
+  headerTitleStyle: {fontSize: 24, fontWeight: 'bold', color: colors.black},
 };
 const App = () => {
   return (
@@ -62,7 +63,11 @@ const App = () => {
             component={WalkthroughScreen}
             options={walkthroughOptions}
           />
-          <Screen name="Notifications" component={NotificationsScreen} />
+          <Screen
+            name="Notifications"
+            component={NotificationsScreen}
+            options={{title: 'Notification Center'}}
+          />
         </Navigator>
       </NavigationContainer>
     </>

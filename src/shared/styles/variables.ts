@@ -8,7 +8,7 @@ export const colors = {
   white: '#ffffff',
   whiteDark: '#f6f5fb',
   black: '#575555',
-  blackLigth: '#b3b3b3',
+  blackLigth: '#c9c5c5;',
 };
 
 export const borderRadius = (percentage: number) =>
