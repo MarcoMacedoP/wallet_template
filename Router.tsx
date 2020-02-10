@@ -35,18 +35,6 @@ const balanceOptions: StackNavigationOptions = {
   headerLeft: null,
 };
 
-const config = {
-  animation: 'spring',
-  config: {
-    stiffness: 1000,
-    damping: 500,
-    mass: 3,
-    overshootClamping: true,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
-  },
-};
-
 const walkthroughOptions: StackNavigationOptions = {
   headerShown: false,
 };
@@ -66,13 +54,7 @@ const App = () => {
             component={BalanceScreen}
             options={balanceOptions}
           />
-          <Screen
-            name="Transfers"
-            component={TransfersScreen}
-            options={({route}: {route: any}) => ({
-              title: route.params.currency.type,
-            })}
-          />
+          <Screen name="Transfers" component={TransfersScreen} />
           <Screen
             name="Walkthrough"
             component={WalkthroughScreen}
@@ -93,12 +75,8 @@ const App = () => {
                 fontSize: 16,
                 fontWeight: 'normal',
               },
-              transitionSpec: {
-                open: config,
-                close: config,
-              },
               gestureEnabled: true,
-              gestureResponseDistance: 'horizontal',
+              gestureResponseDistance: 'vertical-inverted',
               gestureDirection: 'vertical-inverted'
             }}
           />
