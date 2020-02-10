@@ -13,7 +13,7 @@ import {colors} from './src/shared/styles/variables';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
-const {Navigator, Screen} = createStackNavigator({Home: BalanceScreen});
+const {Navigator, Screen} = createStackNavigator();
 
 const homeOptions: StackNavigationOptions = {
   title: 'Wallet',
