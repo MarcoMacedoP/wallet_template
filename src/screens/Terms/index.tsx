@@ -65,7 +65,7 @@ export const TermsScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity
               style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
-              onPress={next}>
+              onPress={() => navigation.replace('Home')}>
               <Text style={{color: 'white', fontSize: 18}}>Confirm</Text>
             </TouchableOpacity>
           </ContainerButtons>
