@@ -10,12 +10,13 @@ import React from 'react';
 import {BalanceScreen} from './src/screens/Balance';
 import {TransfersScreen} from './src/screens/Transfers';
 import {colors} from './src/shared/styles/variables';
+import {Image} from 'react-native';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
 const {Navigator, Screen} = createStackNavigator();
 
-const homeOptions: StackNavigationOptions = {
+const balanceOptions: StackNavigationOptions = {
   title: 'Wallet',
   headerTitleAlign: 'center',
   headerTintColor: colors.white,
@@ -24,6 +25,7 @@ const homeOptions: StackNavigationOptions = {
     fontWeight: 'bold',
   },
   headerTransparent: true,
+  // headerLeft: <Image source={require('./src/assets/icons/logo_mini.png')} />,
 };
 const commonOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
@@ -32,7 +34,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Navigator initialRouteName="Home" screenOptions={commonOptions}>
-        <Screen name="Home" component={BalanceScreen} options={homeOptions} />
+        <Screen
+          name="Home"
+          component={BalanceScreen}
+          options={balanceOptions}
+        />
         <Screen name="Transfers" component={TransfersScreen} />
       </Navigator>
     </NavigationContainer>
