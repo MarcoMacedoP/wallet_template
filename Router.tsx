@@ -29,14 +29,7 @@ const homeOptions: StackNavigationOptions = {
 };
 
 const walkthroughOptions: StackNavigationOptions = {
-  title: 'Wallet',
-  headerTitleAlign: 'center',
-  headerTintColor: colors.white,
-  headerTitleStyle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  headerTransparent: true,
+  headerShown: false
 };
 
 const commonOptions: StackNavigationOptions = {
