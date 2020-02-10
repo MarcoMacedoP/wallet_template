@@ -7,7 +7,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {colors} from '../../shared/styles/variables';
 
 export const BalanceScreen = ({navigation, currencys = [1, 2]}) => {
-  const handleCurrencyClick = () => navigation.navigate('Transfers');
+  const handleCurrencyClick = () => navigation.push('Transfers');
 
   return (
     <>
