@@ -16,6 +16,7 @@ import {colors} from './src/shared/styles/variables';
 import {LayoutHeader} from './src/shared/components/LayoutHeader';
 import {SafeAreaView, View} from 'react-native';
 import {NotificationsScreen} from './src/screens/Notifications/Notifications';
+import { CreateScreen } from './src/screens/Create';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
@@ -75,9 +76,18 @@ const App = () => {
                 fontSize: 16,
                 fontWeight: 'normal',
               },
-              gestureEnabled: true,
-              gestureResponseDistance: 'vertical-inverted',
-              gestureDirection: 'vertical-inverted'
+            }}
+          />
+          <Screen
+            name="Create"
+            component={CreateScreen}
+            options={{
+              title: 'Create',
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontSize: 16,
+                fontWeight: 'normal',
+              },
             }}
           />
         </Navigator>
