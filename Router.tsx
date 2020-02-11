@@ -14,7 +14,7 @@ import {TermsScreen} from './src/screens/Terms';
 
 import {colors} from './src/shared/styles/variables';
 import {LayoutHeader} from './src/shared/components/LayoutHeader';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, View, StatusBar} from 'react-native';
 import {NotificationsScreen} from './src/screens/Notifications/Notifications';
 
 //declarations
@@ -43,12 +43,21 @@ const commonOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
   animationTypeForReplace: 'push',
   headerTitleStyle: {fontSize: 24, fontWeight: 'bold', color: colors.black},
+  headerStyle: {elevation: 0, backgroundColor: colors.white},
 };
 const App = () => {
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <NavigationContainer>
-        <Navigator initialRouteName="Walkthrough" screenOptions={commonOptions} mode="card">
+        <Navigator
+          initialRouteName="Walkthrough"
+          screenOptions={commonOptions}
+          mode="card">
           <Screen
             name="Home"
             component={BalanceScreen}
@@ -77,7 +86,7 @@ const App = () => {
               },
               gestureEnabled: true,
               gestureResponseDistance: 'vertical-inverted',
-              gestureDirection: 'vertical-inverted'
+              gestureDirection: 'vertical-inverted',
             }}
           />
         </Navigator>

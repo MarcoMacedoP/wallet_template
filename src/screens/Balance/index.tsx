@@ -3,12 +3,9 @@ import styled from 'styled-components/native';
 import {StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
 import {BalanceCurrencyComponent} from './components/Currency';
+import {CurrencyType} from '../../shared/types/currency';
 
-const CURRENCYS: Array<{
-  value: string;
-  type: 'BTC' | 'AGVC';
-  name: string;
-}> = [
+const CURRENCYS: Array<CurrencyType> = [
   {
     type: 'BTC',
     value: '0.00',
@@ -27,19 +24,12 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
 
   return (
     <>
-      <StatusBar
-        barStyle="light-content"
-        translucent
-        backgroundColor="transparent"
-      />
       <BalanceHeaderComponent assets="0.00" />
       <CurrencysContainer>
         {currencys.map((currency, index) => (
           <BalanceCurrencyComponent
-            type={currency.type}
-            value={currency.value}
+            currency={currency}
             key={index}
-            name={currency.name}
             onClick={() => handleCurrencyClick(currency)}
           />
         ))}

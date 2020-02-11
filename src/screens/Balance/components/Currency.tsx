@@ -2,15 +2,18 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {colors} from '../../../shared/styles/variables';
 import {View, Image} from 'react-native';
+import {CurrencyType} from '../../../shared/types/currency';
+import {Text, SmallText} from '../../../shared/styles/styled-components/Texts';
 
 type BalanceCurrencyComponentProps = {
   onClick: () => void;
-  type: 'BTC' | 'AGVC';
-  name: string;
-  value: string;
+  currency: CurrencyType;
 };
 export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> = props => {
-  const {onClick, type, value, name} = props;
+  const {
+    onClick,
+    currency: {name, type, value},
+  } = props;
   console.log(name);
   return (
     <Container onPress={onClick} underlayColor={colors.whiteDark}>
@@ -23,9 +26,9 @@ export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> =
                 : require('../../../assets/icons/agave_coin_icon.png')
             }
           />
-          <View>
-            <Title> {type}</Title>
-            <Subtitle>{name}</Subtitle>
+          <View style={{marginLeft: 8}}>
+            <Text> {type}</Text>
+            <SmallText>{name}</SmallText>
           </View>
         </TitleContainer>
         <View>
@@ -54,20 +57,8 @@ const InfoContainer = styled.View`
 const TitleContainer = styled.View`
   flex-direction: row;
 `;
-const Title = styled.Text`
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 16px;
-  color: ${colors.black};
-  margin-left: 8px;
-`;
-const Subtitle = styled(Title)`
-  font-size: 12px;
-  text-transform: capitalize;
-  color: ${colors.blackLigth};
-  padding-left: 4px;
-`;
-const CurrencyStatus = styled(Title)`
+
+const CurrencyStatus = styled(Text)`
   font-weight: bold;
 `;
 const CurrencyInLocal = styled.Text`
