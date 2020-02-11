@@ -6,5 +6,4 @@ export const PageContainer = styled.View`
   height: 100%;
   width: 100%;
   justify-content: flex-start;
-  background-color: ${colors.white};
 `;

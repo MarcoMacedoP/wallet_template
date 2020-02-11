@@ -26,7 +26,7 @@ export const CreateScreen = ({ route , navigation }) => {
             keyboardAppearance={'dark'} 
             keyboardType={'email-address'}
             onChangeText={(value) => validateEmail(value)} 
-            onSubmitEditing={(data) => {console.log("done", pass)}}>
+            onSubmitEditing={(data) => {navigation.replace('Home')}}>
           </InputGray>
         </BodyBox>
       </Container>
