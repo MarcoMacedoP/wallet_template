@@ -19,9 +19,9 @@ export const Text = styled.Text`
   font-size: 16px;
   color: ${colors.black};
 `;
-export const SmallText = styled(Text)`
+export const SmallText = styled(Text)<{isLigth?: boolean}>`
   font-size: 12px;
   text-transform: capitalize;
-  color: ${colors.blackLigth};
+  color: ${props => (props.isLigth ? colors.blackLigth : colors.black)};
   padding-left: 4px;
 `;
