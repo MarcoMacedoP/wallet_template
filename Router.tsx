@@ -14,7 +14,7 @@ import {TermsScreen} from './src/screens/Terms';
 
 import {colors} from './src/shared/styles/variables';
 import {LayoutHeader} from './src/shared/components/LayoutHeader';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, View, StatusBar} from 'react-native';
 import {NotificationsScreen} from './src/screens/Notifications/Notifications';
 import { CreateScreen } from './src/screens/Create';
 
@@ -44,12 +44,21 @@ const commonOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
   animationTypeForReplace: 'push',
   headerTitleStyle: {fontSize: 24, fontWeight: 'bold', color: colors.black},
+  headerStyle: {elevation: 0, backgroundColor: colors.white},
 };
 const App = () => {
   return (
     <>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <NavigationContainer>
-        <Navigator initialRouteName="Walkthrough" screenOptions={commonOptions} mode="card">
+        <Navigator
+          initialRouteName="Walkthrough"
+          screenOptions={commonOptions}
+          mode="card">
           <Screen
             name="Home"
             component={BalanceScreen}
@@ -57,14 +66,14 @@ const App = () => {
           />
           <Screen name="Transfers" component={TransfersScreen} />
           <Screen
-            name="Walkthrough"
-            component={WalkthroughScreen}
-            options={walkthroughOptions}
-          />
-          <Screen
             name="Notifications"
             component={NotificationsScreen}
             options={{title: 'Notification Center'}}
+          />
+          <Screen
+            name="Walkthrough"
+            component={WalkthroughScreen}
+            options={walkthroughOptions}
           />
           <Screen
             name="Terms"
@@ -81,14 +90,16 @@ const App = () => {
           <Screen
             name="Create"
             component={CreateScreen}
-            options={{
-              title: 'Create',
-              headerTitleAlign: 'center',
-              headerTitleStyle: {
-                fontSize: 16,
-                fontWeight: 'normal',
-              },
-            }}
+            options={
+              ({ route }: { route: any }) => ({
+                title: route.params.name,
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                  fontSize: 16,
+                  fontWeight: 'normal',
+                },
+              })
+            }
           />
         </Navigator>
       </NavigationContainer>

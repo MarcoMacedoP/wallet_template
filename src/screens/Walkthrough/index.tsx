@@ -82,11 +82,11 @@ export const WalkthroughScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity
               style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
-              onPress={() => navigation.navigate('Terms')}>
+              onPress={() => navigation.navigate('Terms', { name: 'Create Wallet' } )}>
               <Text style={{color: 'white', fontSize: 18}}>Create Wallet</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Terms')}
+              onPress={() => navigation.navigate('Terms', { name: 'Import Wallet' })}
               style={[{height: 50, backgroundColor: '#50CDD5'}, styles.button]}>
               <Text style={{color: 'white', fontSize: 18}}>Import Wallet</Text>
             </TouchableOpacity>

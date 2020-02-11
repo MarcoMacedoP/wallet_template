@@ -4,10 +4,8 @@ import styles from './styles/styles';
 
 //components
 import { TouchableOpacity, Text, View, ScrollView } from 'react-native';
-export const TermsScreen = ({ navigation }) => {
-    const [count, setCount] = useState(1);
-
-
+export const TermsScreen = ({ route,  navigation }) => {
+    const [count, setCount] = useState(1);  
     var image = require('../../assets/tutorial/tutorial_one.png');
     var image2 = require('../../assets/tutorial/tutorial_two.png');
     var image3 = require('../../assets/tutorial/tutorial_three.png');
@@ -65,7 +63,7 @@ export const TermsScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity
               style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
-              onPress={() => navigation.replace('Create')}>
+              onPress={() => navigation.replace('Create', route.params)}>
               <Text style={{color: 'white', fontSize: 18}}>Confirm</Text>
             </TouchableOpacity>
           </ContainerButtons>
