@@ -3,10 +3,12 @@ import styled from 'styled-components/native';
 import {SmallText} from '../styles/styled-components/Texts';
 import {Image, Clipboard} from 'react-native';
 import {colors} from '../styles/variables';
+import Toast from 'react-native-simple-toast';
 
 export const ClipboardComponent = ({text}) => {
   const onClickHandler = () => {
     Clipboard.setString(text);
+    Toast.show('Adress copied to clipboard!', Toast.SHORT);
   };
 
   return (
