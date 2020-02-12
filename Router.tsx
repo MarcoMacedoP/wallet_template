@@ -16,7 +16,7 @@ import {colors} from './src/shared/styles/variables';
 import {LayoutHeader} from './src/shared/components/LayoutHeader';
 import {SafeAreaView, View, StatusBar} from 'react-native';
 import {NotificationsScreen} from './src/screens/Notifications/Notifications';
-import { CreateScreen } from './src/screens/Create';
+import {CreateScreen} from './src/screens/Create';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
@@ -90,16 +90,14 @@ const App = () => {
           <Screen
             name="Create"
             component={CreateScreen}
-            options={
-              ({ route }: { route: any }) => ({
-                title: route.params.name,
-                headerTitleAlign: 'center',
-                headerTitleStyle: {
-                  fontSize: 16,
-                  fontWeight: 'normal',
-                },
-              })
-            }
+            options={({route}: {route: any}) => ({
+              title: route.params.name,
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontSize: 16,
+                fontWeight: 'normal',
+              },
+            })}
           />
         </Navigator>
       </NavigationContainer>
