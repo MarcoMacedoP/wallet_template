@@ -1,34 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import styles from './styles/styles';
+import Toast from 'react-native-simple-toast';
 
 //components
 import { TouchableOpacity, Text, View, ScrollView } from 'react-native';
 export const TermsScreen = ({ route,  navigation }) => {
-    const [count, setCount] = useState(1);  
-    var image = require('../../assets/tutorial/tutorial_one.png');
-    var image2 = require('../../assets/tutorial/tutorial_two.png');
-    var image3 = require('../../assets/tutorial/tutorial_three.png');
-
-    const next = () => {
-        count !== 3 && setCount(count + 1 )
-    };
-    const back = () => {
-      count !== 1 && setCount(count - 1);
-    };
-
-    const onSwipeLeft = () => {
-        next();
-    }
- 
-    const onSwipeRight = () => {
-        back();
-    }
-
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80,
-    };
+    const [count, setCount] = useState(2);  
 
     return (
       <Container>
@@ -56,16 +34,36 @@ export const TermsScreen = ({ route,  navigation }) => {
         <BodyBox>
           <ContainerButtons>
             <View style={styles.dotBox}>
-              <View style={styles.dotBlueRound}>
-                <View style={styles.dotBlue}></View>
-              </View>
+              <TouchableOpacity style={styles.dotBlueRound} onPress={() => 
+                {
+                  if (count == 1) {
+                    setCount(2);
+                  } else {
+                    setCount(1);
+                  }
+                }}>
+                <View style={count == 1 ? styles.dotBlue : styles.dotGray}></View>
+              </TouchableOpacity>
               <LabelGreen>I agree to the above terms  </LabelGreen>
             </View>
-            <TouchableOpacity
+            {count == 1 ?
+              <TouchableOpacity
               style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
-              onPress={() => navigation.replace('Create', route.params)}>
-              <Text style={{color: 'white', fontSize: 18}}>Confirm</Text>
-            </TouchableOpacity>
+              onPress={() => {
+                if (count == 1) {
+                  navigation.replace('Create', route.params)
+                } else {
+                  Toast.show('Acepta los terminos y condiciones para continuar', Toast.SHORT);
+                }
+              }}>
+                  <Text style={{color: 'white', fontSize: 18}}>Confirm</Text>
+              </TouchableOpacity>
+            :
+              <View style={[{height: 50, backgroundColor: '#E2E3E5'}, styles.button]}>
+                <Text style={{color: 'white', fontSize: 18}}>Confirm</Text>
+              </View>
+            }
+            
           </ContainerButtons>
         </BodyBox>
       </Container>
