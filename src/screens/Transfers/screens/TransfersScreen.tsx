@@ -9,10 +9,20 @@ import {PageContainer, Title, Subtitle} from 'shared/styled-components';
 import {TransfersHistoryComponent} from '../components/History';
 import {colors} from 'shared/styles';
 
-export const TransfersScreen = ({route}) => {
-  console.log(route);
+import {useNavigation} from '@react-navigation/native';
+
+type TransfersScreenProps = {
+  route: any;
+};
+export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
+  const {route} = props;
   const {currency}: {currency: CurrencyType} = route.params;
   const {type, value, name} = currency;
+
+  const navigation = useNavigation();
+  const navigateToSendTransfer = () => navigation.navigate('send');
+  const navigateToRecieveTransfer = () => navigation.navigate('recieve');
+
   return (
     <>
       <Container>
@@ -25,8 +35,8 @@ export const TransfersScreen = ({route}) => {
                   : require('../../../assets/icons/agave_coin_icon.png')
               }
             />
-            <Title>{currency.value}</Title>
-            <Subtitle>= ${currency.value}</Subtitle>
+            <Title>{value}</Title>
+            <Subtitle>= ${value}</Subtitle>
           </Header>
           <ClipboardContainer>
             <ClipboardComponent text="e0d123e5f316bef78bfdf5a008837577" />
@@ -36,14 +46,14 @@ export const TransfersScreen = ({route}) => {
               accent
               width="50%"
               margin="0 4px 0 0"
-              onClick={() => console.log('lol')}>
+              onClick={navigateToSendTransfer}>
               Send
             </Button>
             <Button
               secondary
               width="50%"
               margin="0 0 0 4px"
-              onClick={() => console.log('lol')}>
+              onClick={navigateToRecieveTransfer}>
               Receive
             </Button>
           </ButtonsContainer>
