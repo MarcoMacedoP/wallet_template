@@ -33,8 +33,7 @@ export const TermsScreen = ({ route,  navigation }) => {
         </ContainerText>
         <BodyBox>
           <ContainerButtons>
-            <View style={styles.dotBox}>
-              <TouchableOpacity style={styles.dotBlueRound} onPress={() => 
+            <TouchableOpacity style={styles.dotBox} onPress={() => 
                 {
                   if (count == 1) {
                     setCount(2);
@@ -42,10 +41,11 @@ export const TermsScreen = ({ route,  navigation }) => {
                     setCount(1);
                   }
                 }}>
+              <TouchableOpacity style={styles.dotBlueRound}>
                 <View style={count == 1 ? styles.dotBlue : styles.dotGray}></View>
               </TouchableOpacity>
               <LabelGreen>I agree to the above terms  </LabelGreen>
-            </View>
+            </TouchableOpacity>
             {count == 1 ?
               <TouchableOpacity
               style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}

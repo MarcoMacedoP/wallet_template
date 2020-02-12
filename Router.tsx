@@ -10,6 +10,7 @@ import React from 'react';
 import {WalkthroughScreen} from 'screens/Walkthrough';
 import {BalanceScreen} from 'screens/Balance';
 import {TransfersRoutes} from 'screens/Transfers';
+import {MnemonicRoutes} from 'screens/Mnemonic';
 import {TermsScreen} from 'screens/Terms';
 
 import {colors} from 'shared/styles/variables';
@@ -58,7 +59,7 @@ const App = () => {
       />
       <NavigationContainer>
         <Navigator
-          initialRouteName="Balance"
+          initialRouteName={token ? "Home" : "Mnemonic"}
           screenOptions={commonOptions}
           mode="card">
           <Screen
@@ -101,6 +102,8 @@ const App = () => {
               },
             })}
           />
+
+          <Screen name="Mnemonic" component={MnemonicRoutes} />
         </Navigator>
       </NavigationContainer>
     </>

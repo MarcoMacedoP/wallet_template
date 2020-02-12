@@ -66,7 +66,7 @@ export const CreateScreen = ({ navigation }) => {
               console.log(state.pass);
               console.log(state.passConfirm);
               if (state.passConfirm == state.pass) {
-                navigation.replace('Home')
+                navigation.navigate('Mnemonic')
               } else {
                 Toast.show('Las contraseñas no coinciden', Toast.SHORT);
               }
