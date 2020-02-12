@@ -40,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 import styled from 'styled-components/native';
-import {colors} from '../styles/variables';
+import {colors} from '../styles';
 type StyleProps = {
   margin?: string;
   width?: string;

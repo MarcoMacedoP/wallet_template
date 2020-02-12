@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import React from 'react';
-import {EmptyState} from '../../../shared/components/EmptyState';
+import {EmptyState} from 'shared/components/EmptyState';
 
 export const TransferMessages = ({notifications}) => (
   <View>

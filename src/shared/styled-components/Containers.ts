@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import {colors} from '../variables';
 
 export const PageContainer = styled.View`
   padding: 22px;

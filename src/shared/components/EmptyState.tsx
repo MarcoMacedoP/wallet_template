@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {Image} from 'react-native';
-import {colors} from '../styles/variables';
+import {colors} from '../styles';
 
 export const EmptyState = ({message}) => (
   <Container>

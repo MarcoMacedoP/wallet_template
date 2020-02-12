@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "jsx": "react-native",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./src",
+    /* Base directory to resolve non-absolute module names. */
+    "paths": {
+      "screens": ["./screens"],
+      "shared": ["./shared"],
+      "assets": ["./assets"]
+    }
+  }
+}

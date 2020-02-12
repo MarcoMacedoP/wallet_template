@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {SmallText} from '../styles/styled-components/Texts';
+import {SmallText} from '../styled-components/Texts';
 import {Image, Clipboard} from 'react-native';
-import {colors} from '../styles/variables';
+import {colors} from '../styles';
 import Toast from 'react-native-simple-toast';
 
 export const ClipboardComponent = ({text}) => {

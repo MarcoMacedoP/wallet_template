@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {Image, Dimensions, View, Text} from 'react-native';
-import {colors} from '../styles/variables';
-import { useNavigation } from '@react-navigation/native';
+import {colors} from '../styles';
+import {useNavigation} from '@react-navigation/native';
 export const LayoutHeader = (props: any) => {
-    const navigation = useNavigation();
-  const handlePressNotifications = () => navigation.navigate("Notifications");
+  const navigation = useNavigation();
+  const handlePressNotifications = () => navigation.navigate('Notifications');
 
   return (
     <Container>

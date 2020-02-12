@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {colors} from '../../../shared/styles/variables';
+import {colors} from 'shared/styles';
 import {View, Image} from 'react-native';
-import {CurrencyType} from '../../../shared/types/currency';
-import {Text, SmallText} from '../../../shared/styles/styled-components/Texts';
+import {CurrencyType} from 'shared/types';
+import {Text, SmallText} from 'shared/styled-components';
 
 type BalanceCurrencyComponentProps = {
   onClick: () => void;
@@ -22,8 +22,8 @@ export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> =
           <Image
             source={
               type === 'BTC'
-                ? require('../../../assets/icons/btc_icon.png')
-                : require('../../../assets/icons/agave_coin_icon.png')
+                ? require('assets/icons/btc_icon.png')
+                : require('assets/icons/agave_coin_icon.png')
             }
           />
           <View style={{marginLeft: 3, paddingLeft: 8}}>

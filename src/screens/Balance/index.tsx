@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import {StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
 import {BalanceCurrencyComponent} from './components/Currency';
-import {CurrencyType} from '../../shared/types/currency';
+import {CurrencyType} from 'shared/types';
 
 const CURRENCYS: Array<CurrencyType> = [
   {

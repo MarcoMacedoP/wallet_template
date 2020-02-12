@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Dimensions} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
-import {TabBar} from '../../shared/components/TabBar';
+import {TabBar} from 'shared/components/TabBar';
 import {TransferMessages} from './components/TransferMessages';
 import {SystemMessages} from './components/SystemMessages';
 

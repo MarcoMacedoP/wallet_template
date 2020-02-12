@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {colors} from '../../../shared/styles/variables';
+import {colors} from 'shared/styles';
 
 type BalanceHeaderComponentProps = {
   assets: string;

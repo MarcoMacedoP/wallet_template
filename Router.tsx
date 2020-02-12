@@ -7,16 +7,16 @@ import {
 
 import React from 'react';
 //screens
-import {WalkthroughScreen} from './src/screens/Walkthrough';
-import {BalanceScreen} from './src/screens/Balance';
-import {TransfersScreen} from './src/screens/Transfers';
-import {TermsScreen} from './src/screens/Terms';
+import {WalkthroughScreen} from 'screens/Walkthrough';
+import {BalanceScreen} from 'screens/Balance';
+import {TransfersRoutes} from 'screens/Transfers';
+import {TermsScreen} from 'screens/Terms';
 
-import {colors} from './src/shared/styles/variables';
-import {LayoutHeader} from './src/shared/components/LayoutHeader';
+import {colors} from 'shared/styles/variables';
+import {LayoutHeader} from 'shared/components/LayoutHeader';
 import {SafeAreaView, View, StatusBar} from 'react-native';
-import {NotificationsScreen} from './src/screens/Notifications/Notifications';
-import {CreateScreen} from './src/screens/Create';
+import {NotificationsScreen} from 'screens/Notifications/Notifications';
+import {CreateScreen} from 'screens/Create';
 
 //declarations
 declare var global: {HermesInternal: null | {}};
@@ -56,7 +56,7 @@ const App = () => {
       />
       <NavigationContainer>
         <Navigator
-          initialRouteName="Walkthrough"
+          initialRouteName="Balance"
           screenOptions={commonOptions}
           mode="card">
           <Screen
@@ -64,7 +64,7 @@ const App = () => {
             component={BalanceScreen}
             options={balanceOptions}
           />
-          <Screen name="Transfers" component={TransfersScreen} />
+          <Screen name="Transfers" component={TransfersRoutes} />
           <Screen
             name="Notifications"
             component={NotificationsScreen}

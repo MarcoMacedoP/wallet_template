@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {colors} from '../variables';
+import {colors} from '../styles';
 
 export const Title = styled.Text`
   text-transform: uppercase;

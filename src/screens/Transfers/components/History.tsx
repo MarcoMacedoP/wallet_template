@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 import styled from 'styled-components/native';
-import {colors} from '../../../shared/styles/variables';
-import {Text, SmallText} from '../../../shared/styles/styled-components/Texts';
+import {colors} from 'shared/styles';
+import {Text, SmallText} from 'shared/styled-components/Texts';
 import {TouchableOpacity} from 'react-native';
 
 type TransfersHistoryComponentProps = {

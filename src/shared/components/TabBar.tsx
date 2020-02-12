@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {TabBar as BaseTabBar} from 'react-native-tab-view/';
 import TabBarIndicator from 'react-native-tab-view/src/TabBarIndicator';
-import {colors} from '../styles/variables';
+import {colors} from '../styles';
 import {View} from 'react-native';
 
 export const TabBar = props => (
