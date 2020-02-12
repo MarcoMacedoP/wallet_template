@@ -26,9 +26,9 @@ export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> =
                 : require('../../../assets/icons/agave_coin_icon.png')
             }
           />
-          <View style={{marginLeft: 8}}>
-            <Text> {type}</Text>
-            <SmallText>{name}</SmallText>
+          <View style={{marginLeft: 3, paddingLeft: 8}}>
+            <Text upperCase> {type}</Text>
+            <SmallText style={{marginLeft: 4}}>{name}</SmallText>
           </View>
         </TitleContainer>
         <View>

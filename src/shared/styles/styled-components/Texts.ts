@@ -17,9 +17,10 @@ export const Subtitle = styled(Title)`
 type TextProps = {
   isBold?: boolean;
   color?: 'ligth';
+  upperCase?: boolean;
 };
 export const Text = styled.Text<TextProps>`
-  text-transform: capitalize;
+  text-transform: ${props => (props.upperCase ? 'uppercase' : 'capitalize')};
   font-weight: ${props => (props.isBold ? 'bold' : '400')};
   font-size: 16px;
   color: ${props =>

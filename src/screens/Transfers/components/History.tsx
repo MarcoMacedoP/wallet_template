@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import {colors} from '../../../shared/styles/variables';
 import {Text, SmallText} from '../../../shared/styles/styled-components/Texts';
-import {TouchableHighlight, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 type TransfersHistoryComponentProps = {
   history?: Array<string>;
@@ -22,16 +22,15 @@ export const TransfersHistoryComponent: React.FC<TransfersHistoryComponentProps>
           </TouchableOpacity>
         ))}
       </LabelsContainer>
-      <View>
+      <ContentContainer>
         <SmallText color="ligth">No history :(</SmallText>
-      </View>
+      </ContentContainer>
     </Container>
   );
 };
 
 const Container = styled.View`
   background-color: ${colors.whiteDark};
-  border: 1px solid red;
   height: 100%;
   width: 100%;
 `;
@@ -49,4 +48,7 @@ const Label = styled(Text)<{isSelected: boolean}>`
     props.isSelected ? colors.blackLigth : 'transparent'};
   color: ${props => (props.isSelected ? colors.black : colors.blackLigth)};
   margin-right: 8px;
+`;
+const ContentContainer = styled.View`
+  padding: 0 8px;
 `;
