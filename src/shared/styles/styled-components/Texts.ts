@@ -14,14 +14,18 @@ export const Subtitle = styled(Title)`
   color: ${colors.blackLigth};
   font-weight: 600;
 `;
-export const Text = styled.Text`
-  font-weight: 600;
+type TextProps = {
+  isBold?: boolean;
+  color?: 'ligth';
+  upperCase?: boolean;
+};
+export const Text = styled.Text<TextProps>`
+  text-transform: ${props => (props.upperCase ? 'uppercase' : 'capitalize')};
+  font-weight: ${props => (props.isBold ? 'bold' : '400')};
   font-size: 16px;
-  color: ${colors.black};
+  color: ${props =>
+    props.color === 'ligth' ? colors.blackLigth : colors.black};
 `;
-export const SmallText = styled(Text)<{isLigth?: boolean}>`
+export const SmallText = styled(Text)`
   font-size: 12px;
-  text-transform: capitalize;
-  color: ${props => (props.isLigth ? colors.blackLigth : colors.black)};
-  padding-left: 4px;
 `;
