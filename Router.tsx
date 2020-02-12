@@ -46,6 +46,8 @@ const commonOptions: StackNavigationOptions = {
   headerTitleStyle: {fontSize: 24, fontWeight: 'bold', color: colors.black},
   headerStyle: {elevation: 0, backgroundColor: colors.white},
 };
+
+let token = '';
 const App = () => {
   return (
     <>
