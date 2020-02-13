@@ -1,17 +1,21 @@
 import styled from 'styled-components/native';
 import {Text} from './Texts';
+import {colors} from 'shared/styles';
 
-export const Input = styled.TextInput`
+type InputProps = {
+  align: 'left' | 'center' | 'right';
+};
+export const Input = styled.TextInput<InputProps>`
   height: 50px;
   width: 100%;
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: ${props => props.align || 'center'};
   font-size: 15px;
-  background-color: #ebe8e8;
+  background-color: ${colors.whiteDark};
+  padding: 0 12px;
 `;
 export const Label = styled(Text).attrs(() => ({color: 'ligth'}))`
   text-align: justify;
   /* cambiar justfy por prop */
-  margin-bottom: 15px;
 `;

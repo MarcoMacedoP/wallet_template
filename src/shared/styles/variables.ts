@@ -6,7 +6,7 @@ export const colors = {
   primaryDark: '#2330d7',
   accent: '#05c2ae',
   white: '#ffffff',
-  whiteDark: '#f6f5fb',
+  whiteDark: '#ebe8e8',
   black: '#575555',
   blackLigth: '#c9c5c5',
   blackTransparent: 'rgba(0,0,0,0.1)',
