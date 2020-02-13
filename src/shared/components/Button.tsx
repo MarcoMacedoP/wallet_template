@@ -3,6 +3,7 @@ type ButtonProps = {
   outline?: boolean;
   secondary?: boolean;
   accent?: boolean;
+  isActivated?: boolean;
   onClick: any;
   width?: string;
   margin?: string;
@@ -15,9 +16,10 @@ export const Button: React.FC<ButtonProps> = ({
   secondary,
   accent,
   width,
+  isActivated = true,
   margin,
 }) => {
-  return (
+  return isActivated ? (
     <ButtonContainer
       outline={outline}
       onPress={onClick}
@@ -36,6 +38,10 @@ export const Button: React.FC<ButtonProps> = ({
       }>
       <Label outline={outline}>{children}</Label>
     </ButtonContainer>
+  ) : (
+    <ButtonDeactivaded width={width}>
+      <Label>{children}</Label>
+    </ButtonDeactivaded>
   );
 };
 
@@ -47,6 +53,7 @@ type StyleProps = {
   outline: boolean;
   secondary: boolean;
   accent: boolean;
+  isActivated: boolean;
 };
 
 const Label = styled.Text<StyleProps>`
@@ -57,13 +64,18 @@ const Label = styled.Text<StyleProps>`
   text-transform: uppercase;
 `;
 
-const ButtonContainer = styled.TouchableOpacity<StyleProps>`
+const BaseButtonStyles = `
   align-items: center;
   justify-content: center;
   border-radius: 50px;
   max-height: 50px;
-  width: ${props => (props.width ? props.width : '100%')};
   margin-top: 5px;
+  padding: 8px 4px;
+`;
+
+const ButtonContainer = styled.TouchableOpacity<StyleProps>`
+  ${BaseButtonStyles}
+  width: ${props => (props.width ? props.width : '100%')};
   border: ${props => (props.outline ? `2px solid ${colors.primary}` : 'none')};
   background-color: ${props =>
     props.accent
@@ -73,6 +85,11 @@ const ButtonContainer = styled.TouchableOpacity<StyleProps>`
       : props.secondary
       ? colors.primaryLigth
       : colors.primary};
-  padding: 8px 4px;
   ${props => props.margin && `margin: ${props.margin}`};
+`;
+
+const ButtonDeactivaded = styled.View<StyleProps>`
+  ${BaseButtonStyles}
+  background-color: ${colors.blackLigth};
+  width: ${props => (props.width ? props.width : '100%')};
 `;

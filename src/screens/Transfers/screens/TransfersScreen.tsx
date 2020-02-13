@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 //components
-import {View, ScrollView} from 'react-native';
+
 import {CurrencyType} from 'shared/types';
 import {Button} from 'shared/components/Button';
 import {ClipboardComponent} from 'shared/components/Clipboard';
@@ -72,6 +72,7 @@ const Container = styled.SafeAreaView`
 const TransactionContainer = styled(PageContainer)`
   height: 70%;
   background: ${colors.white};
+  align-items: flex-start;
 `;
 
 const Header = styled.View`
