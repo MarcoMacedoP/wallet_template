@@ -7,14 +7,14 @@ import {CurrencyType} from 'shared/types';
 
 const CURRENCYS: Array<CurrencyType> = [
   {
-    type: 'BTC',
-    value: '0.00',
-    name: 'Bitcoin',
-  },
-  {
     name: 'Agave coin',
     type: 'AGVC',
     value: '0.00',
+  },
+  {
+    type: 'BTC',
+    value: '0.00',
+    name: 'Bitcoin',
   },
 ];
 

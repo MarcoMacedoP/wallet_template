@@ -13,13 +13,13 @@ import {useNavigation} from '@react-navigation/native';
 
 type TransfersScreenProps = {
   route: any;
+  navigation: any;
 };
 export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
-  const {route} = props;
+  const {route, navigation} = props;
   const {currency}: {currency: CurrencyType} = route.params;
   const {type, value, name} = currency;
 
-  const navigation = useNavigation();
   const navigateToSendTransfer = () => navigation.navigate('send');
   const navigateToRecieveTransfer = () => navigation.navigate('recieve');
 
