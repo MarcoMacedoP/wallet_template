@@ -20,7 +20,7 @@ const CURRENCYS: Array<CurrencyType> = [
 
 export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
   const handleCurrencyClick = currency =>
-    navigation.navigate('Transfers', {currency});
+    navigation.navigate('Transfers', {screen: 'home', params: {currency}});
 
   return (
     <>
