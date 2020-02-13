@@ -1,5 +1,6 @@
 export type CurrencyType = {
   value: string;
-  type: 'BTC' | 'AGVC';
+  type: 'ETH' | 'AGVC';
   name: string;
+  image: string;
 };

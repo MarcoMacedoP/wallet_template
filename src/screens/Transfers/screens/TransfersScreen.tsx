@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
 //components
-import {Image, View, ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {CurrencyType} from 'shared/types';
 import {Button} from 'shared/components/Button';
 import {ClipboardComponent} from 'shared/components/Clipboard';
 import {PageContainer, Title, Subtitle} from 'shared/styled-components';
 import {TransfersHistoryComponent} from '../components/History';
 import {colors} from 'shared/styles';
-
-import {useNavigation} from '@react-navigation/native';
 
 type TransfersScreenProps = {
   route: any;
@@ -18,10 +16,11 @@ type TransfersScreenProps = {
 export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
   const {route, navigation} = props;
   const {currency}: {currency: CurrencyType} = route.params;
-  const {type, value, name} = currency;
+  const {value, type} = currency;
 
-  const navigateToSendTransfer = () => navigation.navigate('send');
-  const navigateToRecieveTransfer = () => navigation.navigate('recieve');
+  const navigateToSendTransfer = () => navigation.navigate('send', {currency});
+  const navigateToRecieveTransfer = () =>
+    navigation.navigate('recieve', {currency});
 
   return (
     <>
@@ -30,9 +29,9 @@ export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
           <Header>
             <Image
               source={
-                type === 'BTC'
-                  ? require('../../../assets/icons/btc_icon.png')
-                  : require('../../../assets/icons/agave_coin_icon.png')
+                type === 'AGVC'
+                  ? require('assets/icons/agave_coin_icon.png')
+                  : require('assets/icons/ethereum_icon.png')
               }
             />
             <Title>{value}</Title>
@@ -82,7 +81,10 @@ const Header = styled.View`
   align-items: center;
   margin-bottom: 10px;
 `;
-
+const Image = styled.Image`
+  width: 30px;
+  height: 30px;
+`;
 const ClipboardContainer = styled.View`
   margin: 16px 0;
 `;

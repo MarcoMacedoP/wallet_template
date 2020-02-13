@@ -10,11 +10,13 @@ const CURRENCYS: Array<CurrencyType> = [
     name: 'Agave coin',
     type: 'AGVC',
     value: '0.00',
+    image: 'assets/icons/agave_coin_icon.png',
   },
   {
-    type: 'BTC',
+    type: 'ETH',
     value: '0.00',
-    name: 'Bitcoin',
+    name: 'Ethereum',
+    image: 'assets/icons/ethereum_icon.png',
   },
 ];
 

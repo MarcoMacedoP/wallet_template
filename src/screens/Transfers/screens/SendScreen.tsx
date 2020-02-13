@@ -4,5 +4,5 @@ import {Text} from 'shared/styled-components/Texts';
 type SendTransferScreenProps = {};
 
 export const SendTransferScreen: React.FC<SendTransferScreenProps> = props => {
-  return <Text> Send screen</Text>;
+  return <Text> Transfer Amount</Text>;
 };
