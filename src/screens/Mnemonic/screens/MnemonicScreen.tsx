@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import styles from './styles/styles';
 import Toast from 'react-native-simple-toast';
+import { CenterModal, ContainerModal, IconBoxModal, IconModal } from 'shared/styled-components';
 
 
 //components
@@ -48,7 +49,7 @@ export const MnemonicScreen = ({ navigation }) => {
         </BodyBox>
 
         <Modal
-          animationType="fade"
+          animationType="slide"
           transparent={true}
           visible={state.modalVisible}
           onRequestClose={() => {
@@ -56,9 +57,9 @@ export const MnemonicScreen = ({ navigation }) => {
           }}>
             <CenterModal style={{backgroundColor: 'rgba(0,0,0,0.8)'}}>
               <ContainerModal>
-                <IconBox style={{borderRadius: 25,}}>
-                  <Icon source={webcam} />
-                </IconBox>
+                <IconBoxModal style={{borderRadius: 25,}}>
+                  <IconModal source={webcam} />
+                </IconBoxModal>
                 <ModalBox>
                   <ContainerText>
                       <Title style={{fontSize: 15, textAlign: 'justify', marginBottom:10,}}>Having the mnemonic phrases can 
@@ -86,6 +87,7 @@ export const MnemonicScreen = ({ navigation }) => {
                     <TouchableOpacity
                       style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
                       onPress={() => {
+                        navigation.push('Backup')
                         setState({
                           modalVisible: false,
                         });
@@ -108,20 +110,7 @@ const Container = styled.View`
   justify-content: space-between;
   background-color: white;
 `;
-const CenterModal = styled.View`
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-const ContainerModal = styled.View`
-  height: 80%;
-  width: 90%;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: white;
-  border-radius: 25px;
-`;
+
 const BodyBox = styled.View`
   height: 60%;
   width: 100%;
@@ -129,20 +118,6 @@ const BodyBox = styled.View`
 const Image = styled.Image`
     width: 75%;
     height: 75%;
-    resize-mode: contain;
-`;
-
-const IconBox = styled.View`
-  width: 100%;
-  height: 10%;
-  margin-top: 16px;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-`;
-const Icon = styled.Image`
-    width: 80%;
-    height: 80%;
     resize-mode: contain;
 `;
 

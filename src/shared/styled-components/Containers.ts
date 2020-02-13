@@ -1,8 +1,16 @@
 import styled from 'styled-components/native';
+import { colors } from 'shared/styles';
 
-export const PageContainer = styled.View`
+type ViewProps = {
+  light?: boolean;
+  center?: 'center';
+};
+
+export const PageContainer = styled.View<ViewProps>`
   padding: 22px;
   height: 100%;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: ${ props => props.center ? props.center : 'flex-start'};
+  align-items: center;
+  background-color: ${props => props.light ? colors.white : colors.whiteDark };
 `;
