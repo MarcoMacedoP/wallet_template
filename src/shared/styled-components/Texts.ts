@@ -16,7 +16,7 @@ export const Subtitle = styled(Title)`
 `;
 type TextProps = {
   isBold?: boolean;
-  color?: 'ligth';
+  color?: 'ligth' | 'normal';
   upperCase?: boolean;
 };
 export const Text = styled.Text<TextProps>`

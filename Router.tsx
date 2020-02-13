@@ -48,7 +48,7 @@ const commonOptions: StackNavigationOptions = {
   headerStyle: {elevation: 0, backgroundColor: colors.white},
 };
 
-let token = true;
+let token = false;
 const App = () => {
   return (
     <>
@@ -59,7 +59,7 @@ const App = () => {
       />
       <NavigationContainer>
         <Navigator
-          initialRouteName={token ? 'Home' : 'Mnemonic'}
+          initialRouteName={token ? 'Home' : 'Walkthrough'}
           screenOptions={commonOptions}
           mode="card">
           <Screen
