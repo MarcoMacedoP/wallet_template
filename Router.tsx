@@ -61,7 +61,7 @@ const App = () => {
       />
       <NavigationContainer>
         <Navigator
-          initialRouteName={token ? 'Home' : 'Mnemonic'}
+          initialRouteName={token ? 'Home' : 'Walkthrough'}
           screenOptions={commonOptions}
           mode="card">
           <Screen
