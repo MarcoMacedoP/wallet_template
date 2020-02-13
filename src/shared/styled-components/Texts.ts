@@ -8,6 +8,12 @@ export const Title = styled.Text`
   color: ${colors.black};
   margin-left: 8px;
 `;
+export const H4 = styled.Text`
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  color: ${colors.black};
+`;
 export const Subtitle = styled(Title)`
   font-size: 24px;
   text-transform: capitalize;
@@ -17,7 +23,8 @@ export const Subtitle = styled(Title)`
 type TextProps = {
   isBold?: boolean;
   color?: 'ligth';
-  upperCase?: boolean;
+  upperCase?: boolean
+  center?: boolean;
 };
 export const Text = styled.Text<TextProps>`
   text-transform: ${props => (props.upperCase ? 'uppercase' : 'capitalize')};
@@ -25,6 +32,8 @@ export const Text = styled.Text<TextProps>`
   font-size: 16px;
   color: ${props =>
     props.color === 'ligth' ? colors.blackLigth : colors.black};
+
+  text-align: ${props => (props.center ? 'center' : 'justify')};
 `;
 export const SmallText = styled(Text)`
   font-size: 12px;

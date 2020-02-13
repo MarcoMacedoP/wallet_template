@@ -18,6 +18,8 @@ import {LayoutHeader} from 'shared/components/LayoutHeader';
 import {SafeAreaView, View, StatusBar} from 'react-native';
 import {NotificationsScreen} from 'screens/Notifications/Notifications';
 import {CreateScreen} from 'screens/Create';
+import {LoadingScreen} from 'screens/Loading';
+
 
 //declarations
 declare var global: {HermesInternal: null | {}};
@@ -83,6 +85,7 @@ const App = () => {
             component={TermsScreen}
             options={{
               title: 'User service Agreement',
+              headerBackTitleVisible: false,
               headerTitleAlign: 'center',
               headerTitleStyle: {
                 fontSize: 16,
@@ -95,6 +98,20 @@ const App = () => {
             component={CreateScreen}
             options={({route}: {route: any}) => ({
               title: route.params.name,
+              headerBackTitleVisible: false,
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontSize: 16,
+                fontWeight: 'normal',
+              },
+            })}
+          />
+          <Screen
+            name="Loading"
+            component={LoadingScreen}
+            options={({route}: {route: any}) => ({
+              title: 'Create Wallet',
+              headerBackTitleVisible: false,
               headerTitleAlign: 'center',
               headerTitleStyle: {
                 fontSize: 16,
@@ -103,7 +120,13 @@ const App = () => {
             })}
           />
 
-          <Screen name="Mnemonic" component={MnemonicRoutes} />
+          <Screen name="Mnemonic" component={MnemonicRoutes} options={{
+            headerBackTitleVisible: false,
+            headerTitleStyle: {
+              fontSize: 16,
+              fontWeight: 'normal',
+            },
+          }} />
         </Navigator>
       </NavigationContainer>
     </>

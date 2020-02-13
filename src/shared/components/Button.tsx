@@ -57,7 +57,7 @@ const Label = styled.Text<StyleProps>`
   text-transform: uppercase;
 `;
 
-const ButtonContainer = styled.TouchableHighlight<StyleProps>`
+const ButtonContainer = styled.TouchableOpacity<StyleProps>`
   align-items: center;
   justify-content: center;
   border-radius: 50px;
