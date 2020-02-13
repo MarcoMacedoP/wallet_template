@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {colors} from 'shared/styles';
-import {View, Image} from 'react-native';
+import {View} from 'react-native';
 import {CurrencyType} from 'shared/types';
 import {Text, SmallText} from 'shared/styled-components';
 
@@ -20,9 +20,9 @@ export const BalanceCurrencyComponent: React.FC<BalanceCurrencyComponentProps> =
         <TitleContainer>
           <Image
             source={
-              type === 'BTC'
-                ? require('assets/icons/btc_icon.png')
-                : require('assets/icons/agave_coin_icon.png')
+              type === 'AGVC'
+                ? require('assets/icons/agave_coin_icon.png')
+                : require('assets/icons/ethereum_icon.png')
             }
           />
           <View style={{marginLeft: 3, paddingLeft: 8}}>
@@ -56,7 +56,10 @@ const InfoContainer = styled.View`
 const TitleContainer = styled.View`
   flex-direction: row;
 `;
-
+const Image = styled.Image`
+  width: 30px;
+  height: 30px;
+`;
 const CurrencyStatus = styled(Text)`
   font-weight: bold;
 `;

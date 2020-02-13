@@ -22,9 +22,9 @@ export const Subtitle = styled(Title)`
 `;
 type TextProps = {
   isBold?: boolean;
-  color?: 'ligth';
-  upperCase?: boolean
   center?: boolean;
+  color?: 'ligth' | 'normal';
+  upperCase?: boolean;
 };
 export const Text = styled.Text<TextProps>`
   text-transform: ${props => (props.upperCase ? 'uppercase' : 'capitalize')};
