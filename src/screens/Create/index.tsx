@@ -24,7 +24,6 @@ export const CreateScreen = ({navigation}) => {
           <Input
             secureTextEntry={true}
             keyboardAppearance={'dark'}
-            keyboardType={'email-address'}
             onChangeText={value => {
               setState({
                 ...state,
