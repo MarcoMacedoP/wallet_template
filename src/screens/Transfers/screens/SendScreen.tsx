@@ -103,6 +103,7 @@ const Header = styled(PageContainer)`
   padding-bottom: 12px;
   height: auto;
   align-items: flex-start;
+  justify-content: center;
   width: 100%;
 `;
 const Title = styled(Text)`
