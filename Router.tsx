@@ -61,7 +61,7 @@ const App = () => {
       />
       <NavigationContainer>
         <Navigator
-          initialRouteName={token ? 'Home' : 'Walkthrough'}
+          initialRouteName={token ? 'Home' : 'Mnemonic'}
           screenOptions={commonOptions}
           mode="card">
           <Screen
@@ -73,7 +73,7 @@ const App = () => {
           <Screen
             name="Notifications"
             component={NotificationsScreen}
-            options={{title: 'Notification Center'}}
+            options={{title: 'Notification Center', gestureDirection: 'horizontal-inverted'}}
           />
           <Screen
             name="Walkthrough"
