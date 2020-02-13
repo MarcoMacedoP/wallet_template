@@ -20,7 +20,6 @@ import {NotificationsScreen} from 'screens/Notifications/Notifications';
 import {CreateScreen} from 'screens/Create';
 import {LoadingScreen} from 'screens/Loading';
 
-
 //declarations
 declare var global: {HermesInternal: null | {}};
 const {Navigator, Screen} = createStackNavigator();
@@ -43,7 +42,7 @@ const walkthroughOptions: StackNavigationOptions = {
   headerShown: false,
 };
 
-const commonOptions: StackNavigationOptions = {
+export const commonScreenOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
   animationTypeForReplace: 'push',
   headerTitleStyle: {fontSize: 24, fontWeight: 'bold', color: colors.black},
@@ -62,18 +61,25 @@ const App = () => {
       <NavigationContainer>
         <Navigator
           initialRouteName={token ? 'Home' : 'Walkthrough'}
-          screenOptions={commonOptions}
+          screenOptions={commonScreenOptions}
           mode="card">
           <Screen
             name="Home"
             component={BalanceScreen}
             options={balanceOptions}
           />
-          <Screen name="Transfers" component={TransfersRoutes} />
+          <Screen
+            name="Transfers"
+            component={TransfersRoutes}
+            options={{headerShown: false}}
+          />
           <Screen
             name="Notifications"
             component={NotificationsScreen}
-            options={{title: 'Notification Center', gestureDirection: 'horizontal-inverted'}}
+            options={{
+              title: 'Notification Center',
+              gestureDirection: 'horizontal-inverted',
+            }}
           />
           <Screen
             name="Walkthrough"
@@ -120,13 +126,17 @@ const App = () => {
             })}
           />
 
-          <Screen name="Mnemonic" component={MnemonicRoutes} options={{
-            headerBackTitleVisible: false,
-            headerTitleStyle: {
-              fontSize: 16,
-              fontWeight: 'normal',
-            },
-          }} />
+          <Screen
+            name="Mnemonic"
+            component={MnemonicRoutes}
+            options={{
+              headerBackTitleVisible: false,
+              headerTitleStyle: {
+                fontSize: 16,
+                fontWeight: 'normal',
+              },
+            }}
+          />
         </Navigator>
       </NavigationContainer>
     </>
