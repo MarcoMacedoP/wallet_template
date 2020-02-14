@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
-import styles from './styles/styles';
-import Toast from 'react-native-simple-toast';
 import {PageContainer, H4, SmallText} from 'shared/styled-components';
 import {Button} from 'shared/components/Button';
 import {MnemonicListComponent} from '../components/MnemonicList';
@@ -9,7 +7,7 @@ import {MnemonicListComponent} from '../components/MnemonicList';
 //components
 import {View} from 'react-native';
 
-import {useSeeds} from './hooks/useSeeds';
+import {useSeeds} from '../hooks/useSeeds';
 
 export const BackupScreen = ({navigation}) => {
   const [labels, suffleLables] = useSeeds();

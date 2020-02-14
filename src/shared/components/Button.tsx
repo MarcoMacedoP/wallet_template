@@ -1,4 +1,5 @@
 import React from 'react';
+import {UIActivityIndicator} from 'react-native-indicators';
 type ButtonProps = {
   outline?: boolean;
   secondary?: boolean;
@@ -7,10 +8,12 @@ type ButtonProps = {
   onClick: any;
   width?: string;
   margin?: string;
+  isLoading?: boolean;
 };
 
 export const Button: React.FC<ButtonProps> = ({
   children,
+  isLoading = false,
   outline,
   onClick,
   secondary,
@@ -19,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   isActivated = true,
   margin,
 }) => {
-  return isActivated ? (
+  return !isLoading && isActivated ? (
     <ButtonContainer
       outline={outline}
       onPress={onClick}
@@ -39,14 +42,19 @@ export const Button: React.FC<ButtonProps> = ({
       <Label outline={outline}>{children}</Label>
     </ButtonContainer>
   ) : (
-    <ButtonDeactivaded width={width}>
-      <Label>{children}</Label>
+    <ButtonDeactivaded width={width} isActivated={isActivated}>
+      {isActivated ? (
+        <UIActivityIndicator color={colors.black} size={30} />
+      ) : (
+        <Label>{children}</Label>
+      )}
     </ButtonDeactivaded>
   );
 };
 
 import styled from 'styled-components/native';
 import {colors} from '../styles';
+import {color} from 'react-native-reanimated';
 type StyleProps = {
   margin?: string;
   width?: string;
@@ -92,4 +100,5 @@ const ButtonDeactivaded = styled.View<StyleProps>`
   ${BaseButtonStyles}
   background-color: ${colors.blackLigth};
   width: ${props => (props.width ? props.width : '100%')};
+  ${props => props.isActivated && 'min-height: 50px;'}
 `;

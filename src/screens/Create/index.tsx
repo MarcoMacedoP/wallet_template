@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import styles from './styles/styles';
 import Toast from 'react-native-simple-toast';
+import Wallet from 'erc20-wallet';
+
 import {Button} from 'shared/components/Button';
 //components
 import {Image, TouchableOpacity, Text} from 'react-native';
@@ -15,8 +17,22 @@ export const CreateScreen = ({navigation}) => {
     pass: '',
     passConfirm: '',
     checked: false,
+    isLoading: true,
   });
-  const [, setPass] = useGlobalState('pass');
+
+  async function onSubmit() {
+    console.log(
+      'state.passConfirm == state.pass ?',
+      state.passConfirm == state.pass,
+    );
+    if (state.passConfirm == state.pass) {
+      Wallet.password = state.pass;
+      navigation.navigate('Mnemonic');
+    } else {
+      Toast.show('Las contraseñas no coinciden', Toast.SHORT);
+    }
+  }
+
   return (
     <Container>
       <BodyBox>
@@ -63,16 +79,8 @@ export const CreateScreen = ({navigation}) => {
                 checked: validation.test(state.pass),
               })
             }
-            onSubmitEditing={() => {
-              console.log(state.pass);
-              console.log(state.passConfirm);
-              if (state.passConfirm == state.pass) {
-                setPass(state.pass);
-                navigation.navigate('Mnemonic');
-              } else {
-                Toast.show('Las contraseñas no coinciden', Toast.SHORT);
-              }
-            }}></Input>
+            onSubmitEditing={onSubmit}
+          />
         ) : null}
         <AlertBox>
           <LabelBox>
@@ -102,6 +110,9 @@ export const CreateScreen = ({navigation}) => {
           </LabelBox>
         </AlertBox>
 
+        <Button onClick={onSubmit} isLoading={state.isLoading}>
+          Continue
+        </Button>
         <TouchableOpacity
           style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
           onPress={() => {
