@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import styles from './styles/styles';
 import Toast from 'react-native-simple-toast';
-import { Button } from 'shared/components/Button';
+import {Button} from 'shared/components/Button';
 //components
 import {Image, TouchableOpacity, Text} from 'react-native';
 import {Input, Label} from 'shared/styled-components';
+import {useGlobalState} from 'globalState';
 export const CreateScreen = ({navigation}) => {
   const validation = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
 
@@ -15,7 +16,7 @@ export const CreateScreen = ({navigation}) => {
     passConfirm: '',
     checked: false,
   });
-
+  const [, setPass] = useGlobalState('pass');
   return (
     <Container>
       <BodyBox>
@@ -66,6 +67,7 @@ export const CreateScreen = ({navigation}) => {
               console.log(state.pass);
               console.log(state.passConfirm);
               if (state.passConfirm == state.pass) {
+                setPass(state.pass);
                 navigation.navigate('Mnemonic');
               } else {
                 Toast.show('Las contraseñas no coinciden', Toast.SHORT);
@@ -99,38 +101,36 @@ export const CreateScreen = ({navigation}) => {
             </LabelAlert>
           </LabelBox>
         </AlertBox>
-            
 
         <TouchableOpacity
-            style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
-            onPress={() => {
-              if (state.count == 1) {
-                  if (validation.test(state.pass)) {
-                      setState({
-                        ...state,
-                        count: 2,
-                        checked: false,
-                      });
-                      console.log(state.pass);
-                  } else {
-                    Toast.show(
-                      'La contraseña no cuenta con las caracteristicas',
-                      Toast.SHORT,
-                    );
-                  }
-              } else {
+          style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
+          onPress={() => {
+            if (state.count == 1) {
+              if (validation.test(state.pass)) {
+                setState({
+                  ...state,
+                  count: 2,
+                  checked: false,
+                });
                 console.log(state.pass);
-                console.log(state.passConfirm);
-                if (state.passConfirm == state.pass) {
-                  navigation.navigate('Mnemonic');
-                } else {
-                  Toast.show('Las contraseñas no coinciden', Toast.SHORT);
-                }
+              } else {
+                Toast.show(
+                  'La contraseña no cuenta con las caracteristicas',
+                  Toast.SHORT,
+                );
               }
-            }}>
+            } else {
+              console.log(state.pass);
+              console.log(state.passConfirm);
+              if (state.passConfirm == state.pass) {
+                navigation.navigate('Mnemonic');
+              } else {
+                Toast.show('Las contraseñas no coinciden', Toast.SHORT);
+              }
+            }
+          }}>
           <Text style={{color: 'white', fontSize: 18}}>Continue</Text>
         </TouchableOpacity>
-
       </BodyBox>
     </Container>
   );

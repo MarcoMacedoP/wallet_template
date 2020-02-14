@@ -19,7 +19,7 @@ const App = () => {
       const seed = await erc20.createSeed();
       setLoading(false);
       setSeed(seed);
-      setToken(true);
+      //   setToken(true);
     };
     callSeed();
   }, []);

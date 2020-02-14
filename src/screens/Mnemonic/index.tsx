@@ -9,9 +9,9 @@ export function MnemonicRoutes({route}) {
   return (
     <Mnemonic.Navigator
       initialRouteName="Mnemonic"
-      screenOptions={{headerShown: false,}}>
-      <Mnemonic.Screen name="Mnemonic" component={MnemonicScreen}/>
-      <Mnemonic.Screen name="Backup" component={BackupScreen}/>
+      screenOptions={{headerShown: false}}>
+      <Mnemonic.Screen name="Mnemonic" component={MnemonicScreen} />
+      <Mnemonic.Screen name="Backup" component={BackupScreen} />
     </Mnemonic.Navigator>
   );
 }

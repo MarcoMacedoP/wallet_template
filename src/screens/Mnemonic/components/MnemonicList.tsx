@@ -9,11 +9,13 @@ type MnemonicListComponentProps = {
   data?: Array<string>;
   setPlace: any;
 };
-export const MnemonicListComponent: React.FC<MnemonicListComponentProps> = ({data, setPlace}) => {
-    
-    useEffect(()=> {
-        console.log(data)
-    }, [data])
+export const MnemonicListComponent: React.FC<MnemonicListComponentProps> = ({
+  data,
+  setPlace,
+}) => {
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <Container light>
       <LabelsContainer>
@@ -27,11 +29,11 @@ export const MnemonicListComponent: React.FC<MnemonicListComponentProps> = ({dat
   );
 };
 type ContainerProps = {
-    light?: Boolean;
-}
+  light?: Boolean;
+};
 const Container = styled.View<ContainerProps>`
   align-self: center;
-  background-color: ${props => props.light ? colors.white : colors.whiteDark};
+  background-color: ${props => (props.light ? colors.white : colors.whiteDark)};
   margin: 25px;
 `;
 const LabelsContainer = styled.View`
