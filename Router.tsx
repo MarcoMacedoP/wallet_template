@@ -49,7 +49,7 @@ export const commonScreenOptions: StackNavigationOptions = {
   headerStyle: {elevation: 0, backgroundColor: colors.white},
 };
 
-let token = true;
+let token = false;
 const App = () => {
   return (
     <>
