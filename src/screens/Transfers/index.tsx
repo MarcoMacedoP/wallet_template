@@ -3,8 +3,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {TransfersScreen} from './screens/TransfersScreen';
 import {SendTransferScreen} from './screens/SendScreen';
 import {RecieveTransferScreen} from './screens/RecieveScreen';
-import {commonScreenOptions} from '../../../Router';
+import {commonScreenOptions} from 'Router';
 import {colors} from 'shared/styles';
+import {useGlobalState} from 'globalState';
 
 const Transfers = createStackNavigator();
 

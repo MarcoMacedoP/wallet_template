@@ -1,11 +1,9 @@
-import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack';
-
-import React from 'react';
+import React, {useEffect} from 'react';
 //screens
 import {WalkthroughScreen} from 'screens/Walkthrough';
 import {BalanceScreen} from 'screens/Balance';
@@ -13,15 +11,14 @@ import {TransfersRoutes} from 'screens/Transfers';
 import {MnemonicRoutes} from 'screens/Mnemonic';
 import {TermsScreen} from 'screens/Terms';
 
-import {colors} from 'shared/styles/variables';
 import {LayoutHeader} from 'shared/components/LayoutHeader';
-import {SafeAreaView, View, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import {NotificationsScreen} from 'screens/Notifications/Notifications';
 import {CreateScreen} from 'screens/Create';
 import {LoadingScreen} from 'screens/Loading';
 
-//declarations
-declare var global: {HermesInternal: null | {}};
+import {colors} from 'shared/styles/variables';
+import {useGlobalState} from 'globalState';
 const {Navigator, Screen} = createStackNavigator();
 
 const balanceOptions: StackNavigationOptions = {
@@ -49,8 +46,9 @@ export const commonScreenOptions: StackNavigationOptions = {
   headerStyle: {elevation: 0, backgroundColor: colors.white},
 };
 
-let token = false;
-const App = () => {
+const Router = () => {
+  const [token] = useGlobalState('token');
+
   return (
     <>
       <StatusBar
@@ -59,20 +57,26 @@ const App = () => {
         backgroundColor="transparent"
       />
       <NavigationContainer>
-        <Navigator
-          initialRouteName={token ? 'Home' : 'Walkthrough'}
-          screenOptions={commonScreenOptions}
-          mode="card">
-          <Screen
-            name="Home"
-            component={BalanceScreen}
-            options={balanceOptions}
-          />
+        <Navigator screenOptions={commonScreenOptions} mode="card">
+          {token ? (
+            <Screen
+              name="Balance"
+              component={BalanceScreen}
+              options={balanceOptions}
+            />
+          ) : (
+            <Screen
+              name="Walkthrough"
+              component={WalkthroughScreen}
+              options={walkthroughOptions}
+            />
+          )}
           <Screen
             name="Transfers"
             component={TransfersRoutes}
             options={{headerShown: false}}
           />
+
           <Screen
             name="Notifications"
             component={NotificationsScreen}
@@ -81,11 +85,7 @@ const App = () => {
               gestureDirection: 'horizontal-inverted',
             }}
           />
-          <Screen
-            name="Walkthrough"
-            component={WalkthroughScreen}
-            options={walkthroughOptions}
-          />
+
           <Screen
             name="Terms"
             component={TermsScreen}
@@ -125,7 +125,6 @@ const App = () => {
               },
             })}
           />
-
           <Screen
             name="Mnemonic"
             component={MnemonicRoutes}
@@ -143,4 +142,15 @@ const App = () => {
   );
 };
 
-export default App;
+const Routes = ({token}) => {
+  const navigation = useNavigation();
+  useEffect(() => {
+    console.log({token});
+    if (token) {
+      navigation.navigate('Home');
+    }
+  }, [token]);
+  return <></>;
+};
+
+export default Router;
