@@ -19,7 +19,7 @@
     // };
     // bitcore.versionGuard(global.\_bitcore);
 ```
-
+4. ```./node_modules/.bin/rn-nodeify --hack --install ```
           <p>
             <a href="https://travis-ci.org/react-native-community/react-native-template-typescript">
               <img alt="Build Status" src="https://img.shields.io/travis/react-native-community/react-native-template-typescript.svg" target="_blank" />
