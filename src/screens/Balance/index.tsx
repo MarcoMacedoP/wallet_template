@@ -4,6 +4,8 @@ import {StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
 import {BalanceCurrencyComponent} from './components/Currency';
 import {CurrencyType} from 'shared/types';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 const CURRENCYS: Array<CurrencyType> = [
   {
@@ -24,18 +26,34 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
   const handleCurrencyClick = currency =>
     navigation.navigate('Transfers', {screen: 'home', params: {currency}});
 
+  const goNotifications = () => {
+    navigation.navigate('Notifications');
+  }
+
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80,
+  };
   return (
     <>
-      <BalanceHeaderComponent assets="0.00" />
-      <CurrencysContainer>
-        {currencys.map((currency, index) => (
-          <BalanceCurrencyComponent
-            currency={currency}
-            key={index}
-            onClick={() => handleCurrencyClick(currency)}
-          />
-        ))}
-      </CurrencysContainer>
+      <GestureRecognizer
+        onSwipeDown={goNotifications}
+        onSwipeRight={goNotifications}
+        config={config}
+        style={{
+          flex: 1,
+        }}>
+          <BalanceHeaderComponent assets="0.00" />
+          <CurrencysContainer>
+            {currencys.map((currency, index) => (
+              <BalanceCurrencyComponent
+                currency={currency}
+                key={index}
+                onClick={() => handleCurrencyClick(currency)}
+              />
+            ))}
+          </CurrencysContainer>
+      </GestureRecognizer>
     </>
   );
 };
