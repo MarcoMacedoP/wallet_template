@@ -14,7 +14,7 @@ export const ClipboardComponent = ({text}) => {
   return (
     <Container onPress={onClickHandler} underlayColor={colors.blackTransparent}>
       <>
-        <SmallText> {text}</SmallText>
+        <Text>{text}</Text>
         <Image source={require('../../assets/icons/clipboard_icon.png')} />
       </>
     </Container>
@@ -27,4 +27,8 @@ const Container = styled.TouchableHighlight`
   width: 100%;
   padding: 8px 8px;
   border-radius: 16px;
+`;
+
+const Text = styled(SmallText)`
+  width: 70%;
 `;

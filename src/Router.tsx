@@ -41,7 +41,6 @@ const walkthroughOptions: StackNavigationOptions = {
 
 export const commonScreenOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
-  animationTypeForReplace: 'push',
   headerTitleStyle: {fontSize: 24, fontWeight: 'bold', color: colors.black},
   headerStyle: {elevation: 0, backgroundColor: colors.white},
 };

@@ -8,6 +8,8 @@ import {ClipboardComponent} from 'shared/components/Clipboard';
 import {PageContainer, Title, Subtitle} from 'shared/styled-components';
 import {TransfersHistoryComponent} from '../components/History';
 import {colors} from 'shared/styles';
+import { BalanceHeaderComponent } from 'screens/Balance/components/Header';
+
 
 type TransfersScreenProps = {
   route: any;
@@ -46,6 +48,9 @@ export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
               width="50%"
               margin="0 4px 0 0"
               onClick={navigateToSendTransfer}>
+              <IconsBox>
+                <Icons source={require('assets/icons/send_icon.png')}/>
+              </IconsBox>
               Send
             </Button>
             <Button
@@ -53,6 +58,9 @@ export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
               width="50%"
               margin="0 0 0 4px"
               onClick={navigateToRecieveTransfer}>
+              <IconsBox>
+                <Icons source={require('assets/icons/qr_icon.png')}/>
+              </IconsBox>
               Receive
             </Button>
           </ButtonsContainer>
@@ -68,11 +76,12 @@ const Container = styled.SafeAreaView`
   height: 100%;
   width: 100%;
   justify-content: flex-start;
+  background-color: ${colors.white}
 `;
 const TransactionContainer = styled(PageContainer)`
   height: 70%;
   background: ${colors.white};
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const Header = styled.View`
@@ -86,8 +95,22 @@ const Image = styled.Image`
   width: 30px;
   height: 30px;
 `;
+const IconsBox = styled.View`
+  width: 25px;
+  height: 25px;
+  justify-content: center;
+  align-items: center;
+`;
+const Icons = styled.Image`
+  width: 20px;
+  height: 20px;
+  margin-top: 15px;
+`;
 const ClipboardContainer = styled.View`
-  margin: 16px 0;
+  margin: 16px 0 16px;
+  width: 95%;
+  border-radius: 15px;
+  background-color: ${colors.whiteDark}
 `;
 const ButtonsContainer = styled.View`
   flex-direction: row;
@@ -98,5 +121,5 @@ const ButtonsContainer = styled.View`
 
 const HistoryContainer = styled(PageContainer)`
   background-color: ${colors.whiteDark};
-  height: 30%;
+  height: 40%;
 `;
