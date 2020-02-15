@@ -9,6 +9,7 @@ import {PageContainer, Title, Subtitle} from 'shared/styled-components';
 import {TransfersHistoryComponent} from '../components/History';
 import {colors} from 'shared/styles';
 import { BalanceHeaderComponent } from 'screens/Balance/components/Header';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 type TransfersScreenProps = {
@@ -37,7 +38,7 @@ export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
               }
             />
             <Title>{value}</Title>
-            <Subtitle>= ${value}</Subtitle>
+            <Subtitle>{'= $' + value}</Subtitle>
           </Header>
           <ClipboardContainer>
             <ClipboardComponent text="e0d123e5f316bef78bfdf5a008837577" />
@@ -48,20 +49,14 @@ export const TransfersScreen: React.FC<TransfersScreenProps> = props => {
               width="50%"
               margin="0 4px 0 0"
               onClick={navigateToSendTransfer}>
-              <IconsBox>
-                <Icons source={require('assets/icons/send_icon.png')}/>
-              </IconsBox>
-              Send
+              <Icon name="send" size={15} color="white"/> Send
             </Button>
             <Button
               secondary
               width="50%"
               margin="0 0 0 4px"
               onClick={navigateToRecieveTransfer}>
-              <IconsBox>
-                <Icons source={require('assets/icons/qr_icon.png')}/>
-              </IconsBox>
-              Receive
+              <Icon name="qrcode" size={15} color="white"/> Receive
             </Button>
           </ButtonsContainer>
         </TransactionContainer>

@@ -47,11 +47,12 @@ export const BackupScreen = ({navigation}) => {
           </SmallText>
         )}
       </View>
-
-      <TextArea multiline={true} editable={false} value={hint}></TextArea>
+      {step == 2 ? (
+        <TextArea multiline={true} editable={false} value={hint}></TextArea>
+      ) : null }
 
       {labels.length > 0 ? (
-        <MnemonicListComponent data={labels} setPlace={setPlace} />
+        <MnemonicListComponent data={labels} setPlace={setPlace} step={step}/>
       ) : null}
 
       <Button width="100%" margin="0 4px 0 0" onClick={onSubmit}>

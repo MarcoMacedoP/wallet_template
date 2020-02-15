@@ -8,10 +8,12 @@ import {TouchableOpacity} from 'react-native';
 type MnemonicListComponentProps = {
   data?: Array<string>;
   setPlace: any;
+  step: number;
 };
 export const MnemonicListComponent: React.FC<MnemonicListComponentProps> = ({
   data,
   setPlace,
+  step,
 }) => {
   useEffect(() => {
     console.log(data);
@@ -20,7 +22,7 @@ export const MnemonicListComponent: React.FC<MnemonicListComponentProps> = ({
     <Container light>
       <LabelsContainer>
         {data.map((text, index) => (
-          <Touchable key={index} onPress={() => setPlace(text)}>
+          <Touchable key={index} onPress={() => {step == 2 ? setPlace(text) : null}}>
             <Label>{text}</Label>
           </Touchable>
         ))}

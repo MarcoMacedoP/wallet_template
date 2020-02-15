@@ -38,6 +38,8 @@ target 'wallet_template' do
 
   pod 'react-native-randombytes', :path => '../node_modules/react-native-randombytes'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'wallet_templateTests' do
     inherit! :search_paths
     # Pods for testing

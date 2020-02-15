@@ -4,21 +4,27 @@ import Toast from 'react-native-simple-toast';
 import {Button} from 'shared/components/Button';
 
 import {UIActivityIndicator} from 'react-native-indicators';
+import { useGlobalState } from 'globalState';
 
 //components
 export const LoadingScreen = ({navigation}) => {
   //const validation = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
   var image = require('assets/images/agave_wallet_create.png');
   var check = require('assets/icons/check_icon.png');
-
+  const [, setToken] = useGlobalState('token');
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       // navigation.replace('Home');
       setChecked(true);
+      setToken(true);
     }, 3000);
   }, []);
+
+  const goHome = () => {
+    navigation.replace('Balance');
+  }
 
   return (
     <Container>
@@ -42,7 +48,7 @@ export const LoadingScreen = ({navigation}) => {
             <Button
               width="100%"
               margin="0 4px 0 0"
-              onClick={() => navigation.replace('Home')}>
+              onClick={goHome}>
               Complete
             </Button>
           ) : (

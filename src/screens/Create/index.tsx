@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import styles from './styles/styles';
 import Toast from 'react-native-simple-toast';
 import Wallet from 'erc20-wallet';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import {Button} from 'shared/components/Button';
 //components
@@ -11,7 +13,6 @@ import {Input, Label} from 'shared/styled-components';
 import {useGlobalState} from 'globalState';
 export const CreateScreen = ({navigation}) => {
   const validation = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
-
   const [state, setState] = useState({
     count: 1,
     pass: '',
@@ -71,7 +72,6 @@ export const CreateScreen = ({navigation}) => {
           <Input
             secureTextEntry={true}
             keyboardAppearance={'dark'}
-            keyboardType={'email-address'}
             onChangeText={value =>
               setState({
                 ...state,
@@ -85,34 +85,34 @@ export const CreateScreen = ({navigation}) => {
         <AlertBox>
           <LabelBox>
             <LabelAlert style={state.checked ? {color: 'green'} : null}>
-              ☑ A lower case letter
+              <Icon name="check" size={15} color={state.checked ? 'green' : 'gray'}/> A lower case letter
             </LabelAlert>
           </LabelBox>
           <LabelBox>
             <LabelAlert style={state.checked ? {color: 'green'} : null}>
-              ☑ An uppercase letter
+              <Icon name="check" size={15} color={state.checked ? 'green' : 'gray'}/> An uppercase letter
             </LabelAlert>
           </LabelBox>
           <LabelBox>
             <LabelAlert style={state.checked ? {color: 'green'} : null}>
-              ☑ A number
+              <Icon name="check" size={15} color={state.checked ? 'green' : 'gray'}/> A number
             </LabelAlert>
           </LabelBox>
           <LabelBox>
             <LabelAlert style={state.checked ? {color: 'green'} : null}>
-              ☑ An special character
+              <Icon name="check" size={15} color={state.checked ? 'green' : 'gray'}/> An special character
             </LabelAlert>
           </LabelBox>
           <LabelBox>
             <LabelAlert style={state.checked ? {color: 'green'} : null}>
-              ☑ 8~32 characters
+              <Icon name="check" size={15} color={state.checked ? 'green' : 'gray'}/> 8~32 characters
             </LabelAlert>
           </LabelBox>
         </AlertBox>
 
-        <Button onClick={onSubmit} isLoading={state.isLoading}>
+        {/* <Button onClick={onSubmit} isLoading={state.isLoading}>
           Continue
-        </Button>
+        </Button> */}
         <TouchableOpacity
           style={[{height: 50, backgroundColor: '#2FA0A8'}, styles.button]}
           onPress={() => {

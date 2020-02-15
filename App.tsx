@@ -17,13 +17,13 @@ const App = () => {
   useEffect(() => {
     Wallet.mySeed = 'mipalabraalfanumerica8989';
     setTimeout(() => setLoading(false), 200);
-    // const callSeed = async () => {
-    //   const seed = await erc20.createSeed();
-    //   setLoading(false);
-    //   setSeed(seed);
-    //   //   setToken(true);
-    // };
-    // callSeed();
+     const callSeed = async () => {
+       const seed = await Wallet.createSeed();
+       setLoading(false);
+       setSeed(seed);
+        //  setToken(true);
+     };
+     callSeed();
   }, []);
 
   return isLoading ? <Text>Loading ...</Text> : <Router />;

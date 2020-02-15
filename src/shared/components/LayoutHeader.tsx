@@ -42,7 +42,7 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
             titleColor 
             ? require('../../assets/icons/arrow_back_white.png') 
             : require('../../assets/icons/arrow_back.png')} 
-          style={{width: 25, height: 25,}} />
+          style={{width: 20, height: 20,}} />
       </NotificationsIcon>
       <LabelHeader titleColor={titleColor}>
         {title}
