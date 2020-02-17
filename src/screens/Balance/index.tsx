@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 import {StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
@@ -29,6 +29,9 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
   const goNotifications = () => {
     navigation.navigate('Notifications');
   }
+  // useEffect(() => {
+  //   navigation.navigate('Transfers', {screen: 'address'});
+  // }, [])
 
   const config = {
     velocityThreshold: 0.3,

@@ -6,6 +6,7 @@ import {
   ContainerModal,
   IconBoxModal,
   IconModal,
+  ModalBox,
 } from 'shared/styled-components';
 
 //components
@@ -18,6 +19,9 @@ import {
   ToastAndroid,
 } from 'react-native';
 import {Button} from 'shared/components/Button';
+
+//components
+
 export const MnemonicScreen = ({navigation}) => {
   const [state, setState] = useState({
     modalVisible: false,
@@ -145,11 +149,6 @@ const Image = styled.Image`
   width: 75%;
   height: 75%;
   resize-mode: contain;
-`;
-
-const ModalBox = styled.View`
-  height: 90%;
-  width: 100%;
 `;
 
 const ImageBox = styled.View`
