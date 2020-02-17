@@ -16,5 +16,6 @@ export const Input = styled.TextInput<InputProps>`
 `;
 export const Label = styled(Text).attrs(() => ({color: 'ligth'}))`
   text-align: justify;
+  text-transform: none;
   /* cambiar justfy por prop */
 `;

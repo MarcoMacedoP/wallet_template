@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Input, Label} from 'shared/styled-components';
 import styled from 'styled-components/native';
 import {PasswordLabelBox} from './PasswordLabelBox';
+import {colors} from 'shared/styles';
 
 interface PasswordFormProps {
   onTextChange: (text: string) => void;
@@ -26,15 +27,16 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
         onChangeText={value => onTextChange(value)}
         onSubmitEditing={onSubmitEditing}
       />
-      <AlertBox>{children}</AlertBox>
+      <AlertBox hasChildren={children}>{children}</AlertBox>
     </>
   );
 };
 
 const AlertBox = styled.View`
   justify-content: center;
-  margin-top: 15px;
+  margin: 16px 0;
   border: 0.5px;
-  border-color: #c9c9c9;
+  border-color: ${props =>
+    props.hasChildren ? colors.whiteDark : 'transparent'};
   padding: 5px;
 `;

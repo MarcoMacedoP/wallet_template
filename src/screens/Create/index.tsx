@@ -10,6 +10,7 @@ import {Button} from 'shared/components/Button';
 import {PasswordForm} from './components/PasswordForm';
 import {PasswordLabelBox} from './components/PasswordLabelBox';
 import {usePasswordValidations} from './hooks/usePasswordValidations';
+import {colors} from 'shared/styles';
 export const CreateScreen = ({navigation}) => {
   const [state, setState] = useState({
     pass: '',
@@ -46,84 +47,81 @@ export const CreateScreen = ({navigation}) => {
           console.error(error);
         }
       } else {
-        Toast.show('Las contraseñas no coinciden', Toast.SHORT);
+        Toast.show("Passwords didn't match", Toast.SHORT);
       }
     }
   }
 
   return (
     <Container>
-      <BodyBox>
-        {step === 1 ? (
-          <PasswordForm
-            labelText="Please set security password"
-            value={state.pass}
-            onSubmitEditing={onSubmit}
-            onTextChange={text => onTextChange(text)}>
-            {state.pass.length > 0 && (
-              <>
-                <PasswordLabelBox
-                  isValid={validations.textHasMinorCase}
-                  text="A lower case letter"
-                />
-                <PasswordLabelBox
-                  isValid={validations.textHasUpperCase}
-                  text="A uppercase letter"
-                />
-                <PasswordLabelBox
-                  isValid={validations.textHasANumber}
-                  text=" A number"
-                />
-                <PasswordLabelBox
-                  isValid={validations.textHasValidLong}
-                  text="8~32 characters"
-                />
-                <PasswordLabelBox
-                  isValid={validations.textHasSpecialCharacter}
-                  text="An special character"
-                />
-              </>
-            )}
-          </PasswordForm>
-        ) : (
-          <PasswordForm
-            labelText="Repeat password"
-            value={state.passConfirm}
-            onSubmitEditing={onSubmit}
-            onTextChange={text => onTextChange(text)}>
+      {step === 1 ? (
+        <PasswordForm
+          labelText="Please set security password"
+          value={state.pass}
+          onSubmitEditing={onSubmit}
+          onTextChange={text => onTextChange(text)}>
+          {state.pass.length > 0 && (
+            <>
+              <PasswordLabelBox
+                isValid={validations.textHasMinorCase}
+                text="A lower case letter"
+              />
+              <PasswordLabelBox
+                isValid={validations.textHasUpperCase}
+                text="A uppercase letter"
+              />
+              <PasswordLabelBox
+                isValid={validations.textHasANumber}
+                text=" A number"
+              />
+              <PasswordLabelBox
+                isValid={validations.textHasValidLong}
+                text="8~32 characters"
+              />
+              <PasswordLabelBox
+                isValid={validations.textHasSpecialCharacter}
+                text="An special character"
+              />
+            </>
+          )}
+        </PasswordForm>
+      ) : (
+        <PasswordForm
+          labelText="Repeat password"
+          value={state.passConfirm}
+          onSubmitEditing={onSubmit}
+          onTextChange={text => onTextChange(text)}>
+          {state.passConfirm.length > 0 && (
             <PasswordLabelBox
               isValid={state.pass === state.passConfirm}
               text={
                 state.pass === state.passConfirm
                   ? 'Passwords matches'
-                  : "Password didn't match "
+                  : "Passwords didn't match "
               }
             />
-          </PasswordForm>
-        )}
+          )}
+        </PasswordForm>
+      )}
 
-        <Button
-          onClick={onSubmit}
-          isActivated={
-            step === 1 ? isValidPassword : state.pass === state.passConfirm
-          }
-          isLoading={isLoading}>
-          Continue
-        </Button>
-      </BodyBox>
+      <Button
+        onClick={onSubmit}
+        isActivated={
+          step === 1 ? isValidPassword : state.pass === state.passConfirm
+        }
+        isLoading={isLoading}>
+        Continue
+      </Button>
     </Container>
   );
 };
 
-const Container = styled.View`
+const Container = styled.ScrollView`
+  height: 100%;
+  width: 100%;
   padding: 22px;
   height: 100%;
   width: 100%;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: white;
-`;
-const BodyBox = styled.View`
-  height: 50%;
-  width: 100%;
+  background-color: ${colors.white};
 `;

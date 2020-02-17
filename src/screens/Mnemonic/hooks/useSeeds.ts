@@ -1,9 +1,11 @@
 import {useGlobalState} from 'globalState';
 import {useState, useEffect} from 'react';
+import Wallet from 'erc20-wallet';
 
-export function useSeeds(): [Array<string>, () => void] {
-  const [seed] = useGlobalState('seed');
-  const [seedsSorted, setSeedSorted] = useState(seed.split(' '));
+export function useSeeds(): [Array<string>, () => void, Array<string>] {
+  const {seed} = Wallet;
+  const seedsSorted = seed.split(' ');
+  const [seedsSuffled, setSeedsSuffled] = useState(seedsSorted);
 
   const shuffleSeeds = () => {
     const n = seedsSorted.length;
@@ -18,7 +20,7 @@ export function useSeeds(): [Array<string>, () => void] {
       );
     }
     tempArr.push(seedsSorted[0]);
-    setSeedSorted(tempArr);
+    setSeedsSuffled(tempArr);
   };
-  return [seedsSorted, shuffleSeeds];
+  return [seedsSorted, shuffleSeeds, seedsSuffled];
 }
