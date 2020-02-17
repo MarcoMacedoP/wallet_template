@@ -1,7 +1,7 @@
 import {createGlobalState} from 'react-hooks-global-state';
 
 export const {useGlobalState} = createGlobalState({
-  token: true,
+  keystore: false,
   modalAdd: false,
   seed: '',
   pass: '',
