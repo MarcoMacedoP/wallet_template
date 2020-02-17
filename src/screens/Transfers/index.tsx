@@ -21,6 +21,15 @@ const balanceOptions: StackNavigationOptions = {
   headerLeft: null,
 };
 
+const sendOptions: StackNavigationOptions = {
+  headerTransparent: true,
+  headerTitle: () => (
+    <LayoutHeader light={true} title={'Receive'} titleColor={'white'} leftIcon="back-white" rightIcon="shared" />
+  ),
+  headerBackTitleVisible: false,
+  headerLeft: null,
+};
+
 const recieveOptions: StackNavigationOptions = {
   headerTransparent: true,
   headerTitle: () => (
@@ -52,18 +61,19 @@ export function TransfersRoutes() {
       <Transfers.Screen
         name="send"
         component={SendTransferScreen}
-        options={({route}: {route: any}) => ({
-          ...commonScreenOptions,
-          title: `${route.params.currency.type} Send`,
-          // headerShown: false,
-          headerBackTitleVisible: false,
-          headerStyle: {
-            backgroundColor: colors.whiteDark,
-            shadowColor: 'transparent',
-            shadowRadius: 0,
-            elevation: 0,
-          },
-        })}
+        // options={sendOptions}
+         options={({route}: {route: any}) => ({
+           ...commonScreenOptions,
+           title: `${route.params.currency.type} Send`,
+            // headerShown: false,
+           headerBackTitleVisible: false,
+           headerStyle: {
+             backgroundColor: colors.whiteDark,
+             shadowColor: 'transparent',
+             shadowRadius: 0,
+             elevation: 0,
+           },
+         })}
       />
       <Transfers.Screen
         name="address"

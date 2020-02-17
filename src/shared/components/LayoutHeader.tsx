@@ -7,7 +7,7 @@ import { Label } from 'shared/styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FIcon from 'react-native-vector-icons/Feather';
 import MIcon from 'react-native-vector-icons/Ionicons';
-
+import {useGlobalState} from 'globalState';
 
 type LayoutProps = {
  light?: boolean,
@@ -25,6 +25,7 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
 }) => {
 // export const LayoutHeader = (props: any) => {
   const navigation = useNavigation();
+  const [modalAdd, setModalAdd] = useGlobalState('modalAdd');
   const handlePressNotifications = () => navigation.navigate('Notifications');
   const handlePressBack = () => navigation.goBack();
   const renderLeftIcon = () => {
@@ -74,8 +75,10 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
       </LabelHeader>
       <Shared
         onPress={() => {
-          if (titleColor == 'black') {
+          if (rightIcon == 'address') {
             navigation.navigate('Transfers', {screen: 'address'});
+          } else if(rightIcon == 'add') {
+            setModalAdd(!modalAdd) 
           }
         }}
         underlayColor={colors.white}>

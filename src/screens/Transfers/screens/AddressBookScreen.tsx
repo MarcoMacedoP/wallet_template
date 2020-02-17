@@ -13,21 +13,17 @@ import BaseIcon from 'react-native-vector-icons/FontAwesome';
 import Toast from 'react-native-simple-toast';
 import { CenterModal, ContainerModal, ModalBox, HeaderModal } from 'shared/styled-components';
 
+import {useGlobalState} from 'globalState';
+
 import FIcon from 'react-native-vector-icons/Feather';
 
 type SendTransferScreenProps = {
-  params: {balance: number};
 };
 
 export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {  
-  const [state, setState] = useState({
-    modalVisible: false,
-  });
-  const showModal = () => {
-    setState({
-      modalVisible: !state.modalVisible,
-    });
-  }
+
+  const [modalAdd, setModalAdd] = useGlobalState('modalAdd');
+
   return (
       <Container style={{alignItems: 'center', justifyContent: 'space-around'}} light>
         <Icon
@@ -35,20 +31,20 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
           size={60}
           color={colors.black}
         />
-        <Button isActivated={true} onClick={() => showModal()}>
+        <Button isActivated={true} onClick={() => setModalAdd(!modalAdd)}>
           Add
         </Button>
         <Modal
           animationType="slide"
           transparent={true}
-          visible={state.modalVisible}
+          visible={modalAdd}
           onRequestClose={() => {
             Toast.show('Modal has been closed.', Toast.SHORT);
           }}>
             <CenterModal style={{backgroundColor: 'rgba(0,0,0,0.8)'}}>
               <ContainerModal>
                 <HeaderModal>
-                  <IconButton onPress={() => setState({modalVisible: !state.modalVisible}) }>
+                  <IconButton onPress={() => setModalAdd(!modalAdd)}>
                     <FIcon name="x" size={25} color={colors.black} />
                   </IconButton>
                   <Label>Add new address</Label>
@@ -63,7 +59,7 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
                     <Input align="left" value="" />
                   </InputContainer>
 
-                  <Button isActivated={false} width={"90%"} onClick={() => showModal()}>
+                  <Button isActivated={false} width={"90%"} onClick={() => setModalAdd(!modalAdd)}>
                     Add Address
                   </Button>
                 </ModalBox>
