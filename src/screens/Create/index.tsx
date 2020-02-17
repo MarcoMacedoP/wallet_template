@@ -60,26 +60,30 @@ export const CreateScreen = ({navigation}) => {
             value={state.pass}
             onSubmitEditing={onSubmit}
             onTextChange={text => onTextChange(text)}>
-            <PasswordLabelBox
-              isValid={validations.textHasMinorCase}
-              text="A lower case letter"
-            />
-            <PasswordLabelBox
-              isValid={validations.textHasUpperCase}
-              text="A uppercase letter"
-            />
-            <PasswordLabelBox
-              isValid={validations.textHasANumber}
-              text=" A number"
-            />
-            <PasswordLabelBox
-              isValid={validations.textHasSpecialCharacter}
-              text="An special character"
-            />
-            <PasswordLabelBox
-              isValid={validations.textHasValidLong}
-              text="8~32 characters"
-            />
+            {state.pass.length > 0 && (
+              <>
+                <PasswordLabelBox
+                  isValid={validations.textHasMinorCase}
+                  text="A lower case letter"
+                />
+                <PasswordLabelBox
+                  isValid={validations.textHasUpperCase}
+                  text="A uppercase letter"
+                />
+                <PasswordLabelBox
+                  isValid={validations.textHasANumber}
+                  text=" A number"
+                />
+                <PasswordLabelBox
+                  isValid={validations.textHasValidLong}
+                  text="8~32 characters"
+                />
+                <PasswordLabelBox
+                  isValid={validations.textHasSpecialCharacter}
+                  text="An special character"
+                />
+              </>
+            )}
           </PasswordForm>
         ) : (
           <PasswordForm
@@ -89,7 +93,11 @@ export const CreateScreen = ({navigation}) => {
             onTextChange={text => onTextChange(text)}>
             <PasswordLabelBox
               isValid={state.pass === state.passConfirm}
-              text="Same password"
+              text={
+                state.pass === state.passConfirm
+                  ? 'Passwords matches'
+                  : "Password didn't match "
+              }
             />
           </PasswordForm>
         )}
