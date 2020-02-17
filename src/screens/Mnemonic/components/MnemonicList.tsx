@@ -6,30 +6,34 @@ import {Text, SmallText} from 'shared/styled-components/Texts';
 import {TouchableOpacity} from 'react-native';
 
 type MnemonicListComponentProps = {
-  data?: Array<string>;
-  setPlace: any;
-  step: number;
+  labels?: Array<string>;
+  onLabelSelection?: (index: number) => void;
+  onLabelUnselection?: (text: string) => void;
+  canSelectLabels: boolean;
 };
 export const MnemonicListComponent: React.FC<MnemonicListComponentProps> = ({
-  data,
-  setPlace,
-  step,
+  labels,
+  onLabelSelection,
+  onLabelUnselection,
+  canSelectLabels,
 }) => {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
   return (
     <Container light>
       <LabelsContainer>
-        {data.map((text, index) => (
-          <Touchable key={index} onPress={() => {step == 2 ? setPlace(text) : null}}>
-            <Label>{text}</Label>
-          </Touchable>
+        {labels.map((text, index) => (
+          <TouchableLabel
+            key={index}
+            canSelect={canSelectLabels}
+            onPress={() => onLabelSelection(index)}
+            onUnselect={() => onLabelUnselection(text)}>
+            {text}
+          </TouchableLabel>
         ))}
       </LabelsContainer>
     </Container>
   );
 };
+
 type ContainerProps = {
   light?: Boolean;
 };
@@ -43,9 +47,32 @@ const LabelsContainer = styled.View`
   flex-wrap: wrap;
   justify-content: flex-start;
 `;
+
+const TouchableLabel = ({onPress, children, onUnselect, canSelect}) => {
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handlePress = () => {
+    if (canSelect) {
+      if (isSelected) {
+        setIsSelected(false);
+        onUnselect();
+      } else {
+        setIsSelected(true);
+        onPress();
+      }
+      console.log({isSelected});
+    }
+  };
+
+  return (
+    <Touchable onPress={handlePress} isSelected={isSelected}>
+      <Label isSelected={isSelected}>{children}</Label>
+    </Touchable>
+  );
+};
 const Touchable = styled.TouchableOpacity`
-  background-color: ${colors.accentLight};
-  color: ${colors.primary};
+  background-color: ${props =>
+    props.isSelected ? colors.whiteDark : colors.accentLight};
   margin: 8px;
   border-radius: 5px;
 `;
@@ -53,8 +80,6 @@ const Label = styled(Text)`
   font-size: 12px;
   padding: 10px 15px 10px;
   font-weight: bold;
-  color: ${colors.primary};
-`;
-const ContentContainer = styled.View`
-  padding: 0 8px;
+  text-transform: lowercase;
+  color: ${props => (props.isSelected ? colors.blackLigth : colors.primary)};
 `;
