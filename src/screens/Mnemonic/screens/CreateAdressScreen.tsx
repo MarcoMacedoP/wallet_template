@@ -18,8 +18,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 export const CreateAdressScreen = ({navigation}) => {
   const image = require('assets/images/agave_wallet_create.png');
   const check = require('assets/icons/check_icon.png');
-  const [, setToken] = useGlobalState('token');
-  const [checked, setChecked] = useState(true);
+  const [, setKeyStore] = useGlobalState('keystore');
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     async function createWallet() {
@@ -29,6 +29,7 @@ export const CreateAdressScreen = ({navigation}) => {
         await createAdress();
         await encodeKeystore();
         setChecked(true);
+        setKeyStore(true);
       } catch (error) {
         Toast.show(error);
       }
@@ -49,11 +50,13 @@ export const CreateAdressScreen = ({navigation}) => {
       await AsyncStorage.setItem('keystore', json);
       console.log({storaged: true});
     }
-    // createWallet();
+    createWallet();
   }, []);
 
   const goHome = () => {
-    navigation.replace('Balance');
+    console.log('Go balance');
+
+    navigation.push('Balance');
   };
 
   return (

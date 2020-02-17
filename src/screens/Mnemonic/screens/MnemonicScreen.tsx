@@ -1,24 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import Toast from 'react-native-simple-toast';
-import {
-  CenterModal,
-  ContainerModal,
-  IconBoxModal,
-  IconModal,
-  ModalBox,
-} from 'shared/styled-components';
 
 //components
-import {
-  TouchableOpacity,
-  StyleSheet,
-  Text,
-  View,
-  Modal,
-  ToastAndroid,
-} from 'react-native';
-import {Button} from 'shared/components/Button';
+import {Button, Modal} from 'shared/components';
 
 //components
 
@@ -62,72 +47,62 @@ export const MnemonicScreen = ({navigation}) => {
       </BodyBox>
 
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={state.modalVisible}
-        onRequestClose={() => {
+        isShowed={state.modalVisible}
+        icon={webcam}
+        onClose={() => {
           Toast.show('Modal has been closed.', Toast.SHORT);
         }}>
-        <CenterModal style={{backgroundColor: 'rgba(0,0,0,0.8)'}}>
-          <ContainerModal>
-            <IconBoxModal style={{borderRadius: 25}}>
-              <IconModal source={webcam} />
-            </IconBoxModal>
-            <ModalBox>
-              <ContainerText>
-                <Title
-                  style={{
-                    fontSize: 15,
-                    textAlign: 'justify',
-                    marginBottom: 10,
-                  }}>
-                  Having the mnemonic phrases can have full control over assets.
-                  Users should be aware of the following matters
-                </Title>
-                <Label
-                  style={{
-                    fontSize: 15,
-                    textAlign: 'justify',
-                    marginBottom: 10,
-                  }}>
-                  Never take screenshots. Pay close attention to cameras around.
-                </Label>
-                <Label
-                  style={{
-                    fontSize: 15,
-                    textAlign: 'justify',
-                    marginBottom: 10,
-                  }}>
-                  Write down the words on paper and keep it in isolated from the
-                  internet, Prohibit the disclosure or publicity of mnemonics in
-                  any form or method.
-                </Label>
-                <Label
-                  style={{
-                    fontSize: 15,
-                    textAlign: 'justify',
-                    marginBottom: 10,
-                  }}>
-                  Please make sure to keepc a paper copy of your mnemonic
-                  phrases. Agave Coin is not liable for the los of digital
-                  assets resulting from the loss, damage or other loss of
-                  control over the paper copy of mnemonic phrases.
-                </Label>
-              </ContainerText>
-              <ContainerButtons>
-                <Button
-                  onClick={() => {
-                    navigation.push('Backup');
-                    setState({
-                      modalVisible: false,
-                    });
-                  }}>
-                  Continue
-                </Button>
-              </ContainerButtons>
-            </ModalBox>
-          </ContainerModal>
-        </CenterModal>
+        <ContainerText>
+          <Title
+            style={{
+              fontSize: 15,
+              textAlign: 'justify',
+              marginBottom: 10,
+            }}>
+            Having the mnemonic phrases can have full control over assets. Users
+            should be aware of the following matters
+          </Title>
+          <Label
+            style={{
+              fontSize: 15,
+              textAlign: 'justify',
+              marginBottom: 10,
+            }}>
+            Never take screenshots. Pay close attention to cameras around.
+          </Label>
+          <Label
+            style={{
+              fontSize: 15,
+              textAlign: 'justify',
+              marginBottom: 10,
+            }}>
+            Write down the words on paper and keep it in isolated from the
+            internet, Prohibit the disclosure or publicity of mnemonics in any
+            form or method.
+          </Label>
+          <Label
+            style={{
+              fontSize: 15,
+              textAlign: 'justify',
+              marginBottom: 10,
+            }}>
+            Please make sure to keepc a paper copy of your mnemonic phrases.
+            Agave Coin is not liable for the los of digital assets resulting
+            from the loss, damage or other loss of control over the paper copy
+            of mnemonic phrases.
+          </Label>
+        </ContainerText>
+        <ContainerButtons>
+          <Button
+            onClick={() => {
+              navigation.push('Backup');
+              setState({
+                modalVisible: false,
+              });
+            }}>
+            Continue
+          </Button>
+        </ContainerButtons>
       </Modal>
     </Container>
   );

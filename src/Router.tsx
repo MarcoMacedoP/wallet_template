@@ -15,10 +15,11 @@ import {LayoutHeader} from 'shared/components/LayoutHeader';
 import {StatusBar} from 'react-native';
 import {NotificationsScreen} from 'screens/Notifications/Notifications';
 import {CreateScreen} from 'screens/Create';
-import {LoadingScreen} from 'screens/Loading';
 
 import {colors} from 'shared/styles/variables';
 import {useGlobalState} from 'globalState';
+import {ScrollView} from 'react-native-gesture-handler';
+import styled from 'styled-components/native';
 const {Navigator, Screen} = createStackNavigator();
 
 const balanceOptions: StackNavigationOptions = {
@@ -46,7 +47,7 @@ export const commonScreenOptions: StackNavigationOptions = {
 };
 
 const Router = () => {
-  const [token] = useGlobalState('token');
+  const [keystore] = useGlobalState('keystore');
 
   return (
     <>
@@ -57,7 +58,7 @@ const Router = () => {
       />
       <NavigationContainer>
         <Navigator screenOptions={commonScreenOptions} mode="card">
-          {token ? (
+          {keystore ? (
             <Screen
               name="Balance"
               component={BalanceScreen}
@@ -111,19 +112,7 @@ const Router = () => {
               },
             })}
           />
-          <Screen
-            name="Loading"
-            component={LoadingScreen}
-            options={({route}: {route: any}) => ({
-              title: 'Create Wallet',
-              headerBackTitleVisible: false,
-              headerTitleAlign: 'center',
-              headerTitleStyle: {
-                fontSize: 16,
-                fontWeight: 'normal',
-              },
-            })}
-          />
+
           <Screen
             name="Mnemonic"
             component={MnemonicRoutes}
@@ -140,16 +129,4 @@ const Router = () => {
     </>
   );
 };
-
-const Routes = ({token}) => {
-  const navigation = useNavigation();
-  useEffect(() => {
-    console.log({token});
-    if (token) {
-      navigation.navigate('Home');
-    }
-  }, [token]);
-  return <></>;
-};
-
 export default Router;
