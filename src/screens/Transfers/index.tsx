@@ -10,34 +10,30 @@ import {commonScreenOptions} from 'Router';
 import {colors} from 'shared/styles';
 import {useGlobalState} from 'globalState';
 import {LayoutHeader} from 'shared/components/LayoutHeader';
+import { AddressBookScreen } from './screens/AddressBookScreen';
 
 const Transfers = createStackNavigator();
 
 const balanceOptions: StackNavigationOptions = {
-  title: 'Wallet',
-  headerTitleAlign: 'center',
-  headerTintColor: colors.white,
-  headerTitleStyle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   headerTransparent: true,
-  headerTitle: props => <LayoutHeader {...props} light={true} title={'Send'} />,
+  headerTitle: props => <LayoutHeader {...props} light titleColor={'black'} title={'Send'} leftIcon="back-black" rightIcon="address" />,
   headerBackTitleVisible: false,
   headerLeft: null,
 };
 
 const recieveOptions: StackNavigationOptions = {
-  title: 'Wallet',
-  headerTitleAlign: 'center',
-  headerTintColor: colors.white,
-  headerTitleStyle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   headerTransparent: true,
   headerTitle: () => (
-    <LayoutHeader light={true} title={'Receive'} titleColor={'white'} />
+    <LayoutHeader light={true} title={'Receive'} titleColor={'white'} leftIcon="back-white" rightIcon="shared" />
+  ),
+  headerBackTitleVisible: false,
+  headerLeft: null,
+};
+
+const addressOptions: StackNavigationOptions = {
+  headerTransparent: true,
+  headerTitle: () => (
+    <LayoutHeader light title={'Address Book'} titleColor={'black'} leftIcon="back-black" rightIcon="add" />
   ),
   headerBackTitleVisible: false,
   headerLeft: null,
@@ -60,6 +56,7 @@ export function TransfersRoutes() {
           ...commonScreenOptions,
           title: `${route.params.currency.type} Send`,
           // headerShown: false,
+          headerBackTitleVisible: false,
           headerStyle: {
             backgroundColor: colors.whiteDark,
             shadowColor: 'transparent',
@@ -67,6 +64,11 @@ export function TransfersRoutes() {
             elevation: 0,
           },
         })}
+      />
+      <Transfers.Screen
+        name="address"
+        component={AddressBookScreen}
+        options={addressOptions}
       />
       <Transfers.Screen
         name="recieve"

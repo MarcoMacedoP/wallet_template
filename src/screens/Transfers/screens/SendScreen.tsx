@@ -10,6 +10,8 @@ import {colors} from 'shared/styles';
 import {TouchableOpacity, Image, ScrollView} from 'react-native';
 import Slider from '@react-native-community/slider';
 import {Button} from 'shared/components/Button';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 type SendTransferScreenProps = {
   params: {balance: number};
@@ -21,7 +23,7 @@ export const SendTransferScreen: React.FC<SendTransferScreenProps> = props => {
 
   const [transferValue, setTransferValue] = useState();
   const [minerFee, setMinerFee] = useState(0);
-
+  const navigation = useNavigation();
   const onMaxTransfersClick = () =>
     transferValue === balance
       ? setTransferValue(false)
@@ -61,8 +63,12 @@ export const SendTransferScreen: React.FC<SendTransferScreenProps> = props => {
         <InputContainer>
           <Label>To</Label>
           <Input align="left" value="15566sss5s5ss" />
-          <IconContainer>
-            <Image source={require('assets/icons/contact_icon.png')} />
+          <IconContainer onPress={() => navigation.navigate('Transfers', {screen: 'address'}) }>
+            <Icon
+              name="address-book"
+              size={20}
+              color={colors.accent}
+            />
           </IconContainer>
         </InputContainer>
 

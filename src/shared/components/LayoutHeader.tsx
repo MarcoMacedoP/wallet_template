@@ -4,28 +4,54 @@ import {Image, Dimensions, View, Text} from 'react-native';
 import {colors} from '../styles';
 import {useNavigation} from '@react-navigation/native';
 import { Label } from 'shared/styled-components';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import FIcon from 'react-native-vector-icons/Feather';
+import MIcon from 'react-native-vector-icons/Ionicons';
+
 
 type LayoutProps = {
  light?: boolean,
  title?: string,
  titleColor?: string,
+ leftIcon?: string,
+ rightIcon?: string,
 };
 export const LayoutHeader: React.FC<LayoutProps> = ({
   light = false,
   title,
   titleColor,
+  leftIcon,
+  rightIcon,
 }) => {
 // export const LayoutHeader = (props: any) => {
   const navigation = useNavigation();
   const handlePressNotifications = () => navigation.navigate('Notifications');
   const handlePressBack = () => navigation.goBack();
+  const renderLeftIcon = () => {
+    if (leftIcon == 'back-white')
+      return <FIcon name="arrow-left" size={20} color={colors.white} />
+    else if(leftIcon == 'back-black')
+      return  <FIcon name="arrow-left" size={20} color={colors.black} />
+    else
+    return  null;
+  }
+  const renderRightIcon = () => {
+    if (rightIcon == 'address')
+      return <Icon name="address-book" size={20} color={colors.black} />
+    else if(rightIcon == 'shared')
+      return  <FIcon name="share" size={20} color={colors.white} />
+    else if(rightIcon == 'add')
+      return  <FIcon name="plus" size={20} color={colors.black} />
+    else
+    return  null;
+  }
 
   return light == false ? (
     <Container light={light}>
       <NotificationsIcon
         onPress={handlePressNotifications}
         underlayColor={colors.primaryLigth}>
-        <Image source={require('../../assets/icons/notifications_icon.png')} />
+        <MIcon name="ios-notifications-outline" size={25} color={colors.white} />
       </NotificationsIcon>
       <LogoImage
         resizeMode="cover"
@@ -37,25 +63,27 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
       <NotificationsIcon
         onPress={handlePressBack}
         underlayColor={colors.white}>
-        <Image 
-          source={
-            titleColor 
-            ? require('../../assets/icons/arrow_back_white.png') 
-            : require('../../assets/icons/arrow_back.png')} 
-          style={{width: 20, height: 20,}} />
+        <>
+          {
+            renderLeftIcon()
+          }
+        </>
       </NotificationsIcon>
       <LabelHeader titleColor={titleColor}>
         {title}
       </LabelHeader>
       <Shared
-        onPress={() => {console.log('addess-book');
+        onPress={() => {
+          if (titleColor == 'black') {
+            navigation.navigate('Transfers', {screen: 'address'});
+          }
         }}
         underlayColor={colors.white}>
-          {titleColor ? 
-            <Image source={require('../../assets/icons/shared_icon.png')} style={{resizeMode: 'contain', width: 25, height:25,}} />
-          :
-            <Image source={require('../../assets/icons/contact_icon.png')} style={{width: 25, height: 25,}} />
+        <>
+          {
+            renderRightIcon()
           }
+        </>
       </Shared>
     </Container>
   );
@@ -81,8 +109,6 @@ const NotificationsIcon = styled.TouchableHighlight`
   border-radius: 32px;
 `;
 const Shared = styled.TouchableHighlight`
-  width: 10px;
-  height: 10px;
   justify-content: center;
   align-items: center;
   padding: 8px;

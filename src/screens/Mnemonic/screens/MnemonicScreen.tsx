@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import styles from './styles/styles';
 import Toast from 'react-native-simple-toast';
-import { CenterModal, ContainerModal, IconBoxModal, IconModal } from 'shared/styled-components';
+import { CenterModal, ContainerModal, IconBoxModal, IconModal , ModalBox} from 'shared/styled-components';
 
 
 //components
-import { TouchableOpacity, StyleSheet, Text, View, Modal, ToastAndroid } from 'react-native';
+import { TouchableOpacity, Text, Modal, } from 'react-native';
 export const MnemonicScreen = ({ navigation }) => {
     const [state, setState] = useState({
       modalVisible: false,
@@ -119,11 +119,6 @@ const Image = styled.Image`
     width: 75%;
     height: 75%;
     resize-mode: contain;
-`;
-
-const ModalBox = styled.View`
-  height: 90%;
-  width: 100%;
 `;
 
 const ImageBox = styled.View`
