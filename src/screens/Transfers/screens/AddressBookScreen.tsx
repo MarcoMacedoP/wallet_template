@@ -16,48 +16,65 @@ import {useGlobalState} from 'globalState';
 import FIcon from 'react-native-vector-icons/Feather';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { useNavigation } from '@react-navigation/native';
+import { ScanScreen } from 'shared/components/QrReader';
 
 type SendTransferScreenProps = {
 };
 
 export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {  
   
+  const [modalQR, setModalQR] = useGlobalState('modalQR');
   const [modalAdd, setModalAdd] = useGlobalState('modalAdd');
-  const [listAddress, setListAddress] = useGlobalState('listAddress');
+  const [contactsQuantity, setContactsQuantity] = useGlobalState('contactsQuantity');
   const [state, setState] = useState({
-    index: 0,
     alias: '',
     address: '',
   });
 
+  const [listAddress, setListAddress] = useState([]);
+
+  const navigation = useNavigation();
+
   useEffect(() => {
-    async function getAddress () {
+    async function getAddress () {    
       try {
-       const arrayAddress = JSON.parse( await AsyncStorage.getItem('addresses'));
-       setListAddress(arrayAddress);
+       let arrayAddress: Array<any> = JSON.parse( await AsyncStorage.getItem('contacts'));
+       if (arrayAddress.length !== 0) {
+         setListAddress(arrayAddress);
+        } else {
+          cleanList()
+        }
       } catch (error) {
         console.log(error);
       }
     }
-    if (listAddress.length === 0) {
-      getAddress();
+    async function cleanList () {
+      const tempArray = listAddress.filter(data => data.index !== -1 && data)
+      setListAddress(tempArray);
+      setContactsQuantity(0);
+      await AsyncStorage.setItem('contacts', JSON.stringify(tempArray));
     }
+    getAddress();
   }, [])
   const addNewAddress = async ()  => {
+    setContactsQuantity(contactsQuantity+1)
     var data = {
       alias: state.alias,
       address: state.address,
-      index: state.index,
+      index: contactsQuantity,
     }
-    setListAddress([...listAddress, data]);
-    setModalAdd(!modalAdd);
-    await AsyncStorage.setItem('addresses', JSON.stringify(listAddress));
-    setState({
-      index: state.index + 1,
-      alias: '',
-      address: '',
-    });
+    listAddress.push(data);
+    setListAddress(listAddress);
+    setOnAsync();
+  }
+  const setOnAsync = async () => {
+    await AsyncStorage.setItem('contacts', JSON.stringify(listAddress));
+     setModalAdd(!modalAdd);
+     setState({
+        alias: '',
+        address: '',
+     });   
   }
   
   const onTextAliasChange = text => {
@@ -69,14 +86,15 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
   
   const deleteAddress = async ({item}) => {
     const tempArray = listAddress.filter(data => data.index !== item.index && data)
-    console.log(tempArray);
+    
+    // console.log(tempArray);
     setListAddress(tempArray);
-    await AsyncStorage.setItem('addresses', JSON.stringify(tempArray));
+    await AsyncStorage.setItem('contacts', JSON.stringify(tempArray));
   }
 
   return (
-      <Container hasData={listAddress.length === 0 ? false : true} light>
-        {listAddress.length === 0 ?
+    <Container hasData={listAddress.length === 0 ? false : true} light>
+        {listAddress.length === 0 ? 
           <>
             <Icon
               name="address-card-o"
@@ -93,7 +111,8 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
                 data={listAddress}
                 renderItem={ (data, rowMap) => (
                     <TouchableHighlight 
-                    onPress={() => console.log("here")}
+                    id={rowMap}
+                    // onPress={() => console.log("here")}
                     underlayColor={colors.lightGray}
                     style={{
                       alignItems: 'center',
@@ -130,14 +149,13 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
                         height: 60,
                         borderRadius: 5,
                       }}>
-                         <FIcon name="x-circle" size={25} color={colors.white} />
+                        <FIcon name="x-circle" size={25} color={colors.white} />
                     </TouchableOpacity>
                 )}
                 leftOpenValue={75}   
             />
           </ListContent>
         }
-
         <Modal
           isShowed={modalAdd}
           icon={'x'}
@@ -162,16 +180,32 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
                   keyboardAppearance={'dark'}
                   onChangeText={value => onTextAddressChange(value)}
                 />
+                <IconContainer onPress={() => {
+                  setModalAdd(!modalAdd);
+                  setModalQR(!modalQR);
+                }}>
+                  <Icon name="qrcode" size={15} color={colors.accent} />
+                </IconContainer>
             </InputContainer>
             <Button isActivated={true} width={"90%"} onClick={() => addNewAddress()}>
               Add Address
             </Button>
         </Modal>
+        
+        <Modal
+          isShowed={modalQR}
+          icon={'x'}
+          onClose={() => {
+            setModalQR(!modalQR);
+            setModalAdd(!modalAdd);
+          }}>
+            <ScanScreen />
+        </Modal>
+
       </Container>
   );
 };
 const Icon = styled(BaseIcon)`
-  
 `;
 type ContainerProps = {
   hasData: boolean
@@ -208,4 +242,11 @@ const LabelBox = styled.View`
 const Label = styled(BaseLabel)`
   position: relative;
   top: 4px;
+`;
+const IconContainer = styled.TouchableOpacity`
+  position: absolute;
+  right: 12px;
+  bottom: 28px;
+  justify-content: center;
+  align-items: center;
 `;

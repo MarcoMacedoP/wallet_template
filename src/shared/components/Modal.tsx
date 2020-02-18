@@ -6,13 +6,6 @@ import {
   Label as BaseLabel,
 } from 'shared/styled-components';
 import FIcon from 'react-native-vector-icons/Feather';
-
-type ModalProps = {
-  isShowed: boolean;
-  onClose: () => void;
-  icon?: string;
-  image?: string;
-};
 /**
  *  A component to manage modals through app.
  *  @param  isShowed indicates if modal is showed
@@ -20,6 +13,13 @@ type ModalProps = {
  *  @param icon a function to be called when the modal closes.
  *  @param image (optional) an image showed in the top of modal
  */
+type ModalProps = {
+  isShowed: boolean;
+  onClose: () => void;
+  icon?: string;
+  image?: string;
+};
+
 export const Modal: React.FC<ModalProps> = ({
   isShowed,
   onClose,
