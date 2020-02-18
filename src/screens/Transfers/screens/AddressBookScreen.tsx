@@ -7,11 +7,11 @@ import {
 } from 'shared/styled-components';
 import styled from 'styled-components/native';
 import {colors} from 'shared/styles';
-import {TouchableOpacity, Modal, View, TouchableHighlight, StyleSheet, Animated, Dimensions} from 'react-native';
+import {TouchableOpacity, View, TouchableHighlight, StyleSheet, Animated, Dimensions} from 'react-native';
 import {Button} from 'shared/components/Button';
 import BaseIcon from 'react-native-vector-icons/FontAwesome';
 import Toast from 'react-native-simple-toast';
-import { CenterModal, ContainerModal, ModalBox, HeaderModal } from 'shared/styled-components';
+import { Modal } from 'shared/components';
 import {useGlobalState} from 'globalState';
 import FIcon from 'react-native-vector-icons/Feather';
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -67,14 +67,15 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
     setState({...state, address: text});
   };
   
-  const deleteAddress = ({item}) => {
+  const deleteAddress = async ({item}) => {
     const tempArray = listAddress.filter(data => data.index !== item.index && data)
     console.log(tempArray);
     setListAddress(tempArray);
+    await AsyncStorage.setItem('addresses', JSON.stringify(tempArray));
   }
 
   return (
-      <Container hasData={listAddress.length == 0 ? false : true} light>
+      <Container hasData={listAddress.length === 0 ? false : true} light>
         {listAddress.length === 0 ?
           <>
             <Icon
@@ -90,7 +91,7 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
           <ListContent>
             <SwipeListView
                 data={listAddress}
-                renderItem={ (data, rowMap) => data == null ? null : (
+                renderItem={ (data, rowMap) => (
                     <TouchableHighlight 
                     onPress={() => console.log("here")}
                     underlayColor={colors.lightGray}
@@ -137,49 +138,34 @@ export const AddressBookScreen: React.FC<SendTransferScreenProps> = props => {
           </ListContent>
         }
 
-        
         <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalAdd}
-          onRequestClose={() => {
-            Toast.show('Modal has been closed.', Toast.SHORT);
+          isShowed={modalAdd}
+          icon={'x'}
+          onClose={() => {
+            setModalAdd(!modalAdd);
           }}>
-            <CenterModal style={{backgroundColor: 'rgba(0,0,0,0.8)'}}>
-              <ContainerModal>
-                <HeaderModal>
-                  <IconButton onPress={() => setModalAdd(!modalAdd)}>
-                    <FIcon name="x" size={25} color={colors.black} />
-                  </IconButton>
-                  <Label>Add new address</Label>
-                </HeaderModal>
-                <ModalBox>
-                  <InputContainer>
-                    <Label>Alias</Label>
-                    <Input
-                        align="left"
-                        value={state.alias}
-                        maxLength={15}
-                        keyboardAppearance={'dark'}
-                        onChangeText={value => onTextAliasChange(value)}
-                      />
-                  </InputContainer>
-                  <InputContainer>
-                    <Label>Address</Label>
-                    <Input
-                        align="left"
-                        value={state.address}
-                        keyboardAppearance={'dark'}
-                        onChangeText={value => onTextAddressChange(value)}
-                      />
-                  </InputContainer>
-
-                  <Button isActivated={true} width={"90%"} onClick={() => addNewAddress()}>
-                    Add Address
-                  </Button>
-                </ModalBox>
-              </ContainerModal>
-            </CenterModal>
+            <InputContainer>
+              <Label>Alias</Label>
+              <Input
+                  align="left"
+                  value={state.alias}
+                  maxLength={15}
+                  keyboardAppearance={'dark'}
+                  onChangeText={value => onTextAliasChange(value)}
+                />
+            </InputContainer>
+            <InputContainer>
+              <Label>Address</Label>
+              <Input
+                  align="left"
+                  value={state.address}
+                  keyboardAppearance={'dark'}
+                  onChangeText={value => onTextAddressChange(value)}
+                />
+            </InputContainer>
+            <Button isActivated={true} width={"90%"} onClick={() => addNewAddress()}>
+              Add Address
+            </Button>
         </Modal>
       </Container>
   );
@@ -201,21 +187,12 @@ const ListContent = styled.View`
   width: 100%;
   height: 80%;
 `;
-
-const IconButton  = styled.TouchableOpacity`
-
-`;
 const InputContainer = styled.View`
   margin: 8px 0;
   padding: 4px 8px;
   width: 90%;
   background-color: ${colors.whiteDark};
   border-radius: 4px;
-`;
-
-const Label = styled(BaseLabel)`
-  position: relative;
-  top: 4px;
 `;
 const IconBox = styled.View`
   width: 10%;
@@ -227,4 +204,8 @@ const LabelBox = styled.View`
   width: 90%;
   justify-content: center;
   align-items: center;
+`;
+const Label = styled(BaseLabel)`
+  position: relative;
+  top: 4px;
 `;

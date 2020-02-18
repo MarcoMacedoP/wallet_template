@@ -3,9 +3,7 @@ import {createGlobalState} from 'react-hooks-global-state';
 export const {useGlobalState} = createGlobalState({
   keystore: false,
   modalAdd: false,
-  listAddress: [
-    {}
-  ],
+  listAddress: [],
   seed: '',
   pass: '',
 });

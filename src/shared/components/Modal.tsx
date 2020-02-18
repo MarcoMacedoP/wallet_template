@@ -2,36 +2,51 @@ import React from 'react';
 import {Modal as NativeModal, Dimensions} from 'react-native';
 import {colors} from 'shared/styles';
 import styled from 'styled-components/native';
+import {
+  Label as BaseLabel,
+} from 'shared/styled-components';
+import FIcon from 'react-native-vector-icons/Feather';
 
 interface ModalProps {
   isShowed: boolean;
   onClose: () => void;
   icon?: string;
+  image?: string;
 }
 
 export const Modal: React.FC<ModalProps> = ({
   isShowed,
   onClose,
   icon,
+  image,
   children,
 }) => (
   <Container
-    animationType="slide"
+    animationType="fade"
     transparent={true}
     visible={isShowed}
     onRequestClose={onClose}>
     <ScrollView
       alwaysBounceVertical
+      style={{backgroundColor: 'rgba(0,0,0,0.8)'}}
       contentContainerStyle={{
         justifyContent: 'center',
         alignItems: 'center',
         height: Dimensions.get('window').height,
       }}>
       <ContainerModal>
-        {icon && (
+        {image && (
           <IconBoxModal style={{borderRadius: 25}}>
-            <IconModal source={icon} />
+            <IconModal source={image} />
           </IconBoxModal>
+        )}
+        {icon && (
+          <HeaderModal>
+            <IconButton onPress={() => onClose()}>
+              <FIcon name="x" size={25} color={colors.black} />
+            </IconButton>
+            <Label>Add new address</Label>
+          </HeaderModal>
         )}
         <ModalBox>{children}</ModalBox>
       </ContainerModal>
@@ -53,7 +68,9 @@ const ContainerModal = styled.View`
   height: ${Dimensions.get('window').height * 0.8}px;
   width: 90%;
 `;
+const IconButton  = styled.TouchableOpacity`
 
+`;
 const IconBoxModal = styled.View`
   width: 100%;
   height: 10%;
@@ -61,6 +78,19 @@ const IconBoxModal = styled.View`
   justify-content: center;
   align-items: center;
   background-color: white;
+`;
+const HeaderModal = styled.View`
+  width: 100%;
+  height: 10%;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;  
+  border-radius: 15px;
+`;
+const Label = styled(BaseLabel)`
+  position: relative;
+  top: 4px;
 `;
 const IconModal = styled.Image`
   width: 80%;
