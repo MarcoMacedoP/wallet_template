@@ -4,3 +4,4 @@ export * from './EmptyState';
 export * from './LayoutHeader';
 export * from './TabBar';
 export * from './Modal';
+export * from './Loading';

@@ -21,6 +21,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
     <>
       <Label>{labelText} </Label>
       <Input
+        align="left"
         secureTextEntry={true}
         value={value}
         keyboardAppearance={'dark'}
