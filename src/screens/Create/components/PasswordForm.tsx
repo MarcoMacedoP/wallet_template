@@ -27,6 +27,7 @@ export const PasswordForm: React.FC<PasswordFormProps> = ({
         keyboardAppearance={'dark'}
         onChangeText={value => onTextChange(value)}
         onSubmitEditing={onSubmitEditing}
+        autoFocus
       />
       <AlertBox hasChildren={children}>{children}</AlertBox>
     </>

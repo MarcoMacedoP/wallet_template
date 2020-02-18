@@ -13,12 +13,14 @@ import Wallet from 'erc20-wallet';
 import {useGlobalState} from 'globalState';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Image} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 
-export const CreateAdressScreen = ({navigation}) => {
+export const CreateAdressScreen = () => {
   const image = require('assets/images/agave_wallet_create.png');
   const check = require('assets/icons/check_icon.png');
   const [, setKeyStore] = useGlobalState('keystore');
   const [checked, setChecked] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function createWallet() {
@@ -29,20 +31,22 @@ export const CreateAdressScreen = ({navigation}) => {
         await encodeKeystore();
         setChecked(true);
         setKeyStore(true);
-        setTimeout(goBalance, 200);
       } catch (error) {
         Toast.show(error);
       }
     }
     async function createStore() {
+      Wallet.numAddr = 10;
       const keystore = await Wallet.createdStored();
       Wallet.keystore = keystore;
       console.log({keystore: true});
     }
     async function createAdress() {
-      Wallet.numAddr = 100;
-      const address = await Wallet.generateAddress();
+      const address: [] = (await Wallet.generateAddress()) || [];
       Wallet.address = address;
+      console.log({address: address.length, type: typeof address});
+
+      await AsyncStorage.setItem('address', JSON.stringify(address));
       console.log({address: true});
     }
     async function encodeKeystore() {
@@ -50,10 +54,9 @@ export const CreateAdressScreen = ({navigation}) => {
       await AsyncStorage.setItem('keystore', json);
       console.log({storaged: true});
     }
-    createWallet();
+    createWallet().then(goBalance);
   }, []);
-
-  const goBalance = () => navigation.push('Balance');
+  const goBalance = () => navigation.navigate('Balance');
 
   return (
     <PageContainer light>
@@ -79,10 +82,6 @@ export const CreateAdressScreen = ({navigation}) => {
     </PageContainer>
   );
 };
-
-//   <Button onClick={goHome} secondary>
-//     Done
-//   </Button>;
 
 const BodyBox = styled.View`
   height: 100%;

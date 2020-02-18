@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
 import {StatusBar} from 'react-native';
 import {BalanceHeaderComponent} from './components/Header';
 import {BalanceCurrencyComponent} from './components/Currency';
 import {CurrencyType} from 'shared/types';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-
+import GestureRecognizer from 'react-native-swipe-gestures';
+import {useGlobalState} from 'globalState';
+import Wallet from 'erc20-wallet';
 
 const CURRENCYS: Array<CurrencyType> = [
   {
@@ -23,15 +24,30 @@ const CURRENCYS: Array<CurrencyType> = [
 ];
 
 export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
+  const [keystore] = useGlobalState('keystore');
   const handleCurrencyClick = currency =>
     navigation.navigate('Transfers', {screen: 'home', params: {currency}});
 
-  const goNotifications = () => {
-    navigation.navigate('Notifications');
-  }
+  const goNotifications = () => navigation.navigate('Notifications');
+
   // useEffect(() => {
-  //   navigation.navigate('Transfers', {screen: 'address'});
-  // }, [])
+  //   async function getDataToken() {
+  //     // Wallet.numAddr = 3;
+
+  //     Wallet.tokenAddr = '0x53302445bca854f615053bcae2381f5b3db9fe78';
+  //     try {
+  //       // const token = await Wallet.getDataToken();
+  //       const token = await Wallet
+  //         .getBalance
+  //         // '0x09a5436b9b16937b5dbe8f7851c90d50102f2fbe',
+  //         ();
+  //       return token;
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  //   getDataToken().then(respone => console.log(respone));
+  // }, []);
 
   const config = {
     velocityThreshold: 0.3,
@@ -46,16 +62,16 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
         style={{
           flex: 1,
         }}>
-          <BalanceHeaderComponent assets="0.00" />
-          <CurrencysContainer>
-            {currencys.map((currency, index) => (
-              <BalanceCurrencyComponent
-                currency={currency}
-                key={index}
-                onClick={() => handleCurrencyClick(currency)}
-              />
-            ))}
-          </CurrencysContainer>
+        <BalanceHeaderComponent assets="0.00" />
+        <CurrencysContainer>
+          {currencys.map((currency, index) => (
+            <BalanceCurrencyComponent
+              currency={currency}
+              key={index}
+              onClick={() => handleCurrencyClick(currency)}
+            />
+          ))}
+        </CurrencysContainer>
       </GestureRecognizer>
     </>
   );

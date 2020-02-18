@@ -9,6 +9,7 @@ import {Animated, View, ScrollView} from 'react-native';
 import {useFindWalletInStorage} from 'shared/hooks/useFindWalletInStorage';
 //declarations
 declare var global: {HermesInternal: null | {}};
+//Wallet initializations
 Wallet.mySeed = 'mipalabraalfanumerica8989';
 
 const FadeInView = props => {
@@ -34,7 +35,21 @@ const FadeInView = props => {
 
 const App = () => {
   const {isLoading} = useFindWalletInStorage();
-
+  useEffect(() => {
+    async function fetchProvider() {
+      const response = await fetch(
+        'https://erc20.lomeli.xyz/agavecoin/get-provider',
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        },
+      );
+      const {status, data} = await response.json();
+      Wallet.provider = data;
+      return {data, status};
+    }
+    fetchProvider();
+  }, []);
   return isLoading ? (
     <Splash />
   ) : (
