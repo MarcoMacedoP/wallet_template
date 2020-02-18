@@ -10,7 +10,6 @@ type LoadingProps = {
 };
 /**
  * A component for show a loading state.
- *
  */
 export const Loading: React.FC<LoadingProps> = ({image, text}) => (
   <Container>

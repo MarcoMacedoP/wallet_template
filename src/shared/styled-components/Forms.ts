@@ -20,5 +20,4 @@ export const Label = styled(Text).attrs(() => ({
 }))`
   text-align: ${props => (props.center ? 'center' : 'justify')};
   text-transform: none;
-  /* cambiar justfy por prop */
 `;
