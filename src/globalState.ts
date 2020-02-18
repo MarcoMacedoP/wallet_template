@@ -4,6 +4,7 @@ export const {useGlobalState} = createGlobalState({
   keystore: {},
   modalAdd: false,
   listAddress: [{}],
+
   seed: '',
   pass: '',
 });

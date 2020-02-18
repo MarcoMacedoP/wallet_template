@@ -30,24 +30,13 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
 
   const goNotifications = () => navigation.navigate('Notifications');
 
-  // useEffect(() => {
-  //   async function getDataToken() {
-  //     // Wallet.numAddr = 3;
-
-  //     Wallet.tokenAddr = '0x53302445bca854f615053bcae2381f5b3db9fe78';
-  //     try {
-  //       // const token = await Wallet.getDataToken();
-  //       const token = await Wallet
-  //         .getBalance
-  //         // '0x09a5436b9b16937b5dbe8f7851c90d50102f2fbe',
-  //         ();
-  //       return token;
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   getDataToken().then(respone => console.log(respone));
-  // }, []);
+  useEffect(() => {
+    async function getBalance() {
+      const data = await Wallet.getBalance();
+      console.log({data});
+    }
+    getBalance();
+  }, []);
 
   const config = {
     velocityThreshold: 0.3,
