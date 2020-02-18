@@ -13,9 +13,12 @@ export const Input = styled.TextInput<InputProps>`
   text-align: ${props => props.align || 'center'};
   font-size: 15px;
   background-color: ${colors.whiteDark};
+  padding: 0 16px;
 `;
-export const Label = styled(Text).attrs(() => ({color: 'ligth'}))`
-  text-align: justify;
+export const Label = styled(Text).attrs(() => ({
+  color: 'ligth',
+}))`
+  text-align: ${props => (props.center ? 'center' : 'justify')};
   text-transform: none;
   /* cambiar justfy por prop */
 `;

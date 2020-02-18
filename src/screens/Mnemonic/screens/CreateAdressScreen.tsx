@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/native';
 import Toast from 'react-native-simple-toast';
-import {Button} from 'shared/components';
+import {Button, Loading} from 'shared/components';
 import {
-  Title as BaseTitle,
   Label,
   PageContainer,
   Subtitle,
-  H4,
+  H4 as BaseTitle,
 } from 'shared/styled-components';
 import Wallet from 'erc20-wallet';
 
-import {UIActivityIndicator} from 'react-native-indicators';
 import {useGlobalState} from 'globalState';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Image} from 'react-native';
 
 export const CreateAdressScreen = ({navigation}) => {
   const image = require('assets/images/agave_wallet_create.png');
@@ -30,6 +29,7 @@ export const CreateAdressScreen = ({navigation}) => {
         await encodeKeystore();
         setChecked(true);
         setKeyStore(true);
+        setTimeout(goBalance, 200);
       } catch (error) {
         Toast.show(error);
       }
@@ -53,17 +53,14 @@ export const CreateAdressScreen = ({navigation}) => {
     createWallet();
   }, []);
 
-  const goHome = () => {
-    console.log('Go balance');
-
-    navigation.push('Balance');
-  };
+  const goBalance = () => navigation.push('Balance');
 
   return (
     <PageContainer light>
       <BodyBox>
         {checked ? (
-          <>
+          <CreatedContainer>
+            <Image source={check} />
             <ContainerText>
               <Title>Wallet created. </Title>
               <Label>
@@ -71,58 +68,42 @@ export const CreateAdressScreen = ({navigation}) => {
                 them safely and do not leak information to others
               </Label>
             </ContainerText>
-
-            <ContainerButtons>
-              <Button onClick={goHome} accent>
-                Done
-              </Button>
-            </ContainerButtons>
-          </>
+          </CreatedContainer>
         ) : (
-          <>
-            <ContainerText>
-              <Label>Wallet is being created, please wait a moment</Label>
-            </ContainerText>
-            <ContainerButtons>
-              <UIActivityIndicator size={50} color="#65DDB9" />
-            </ContainerButtons>
-          </>
+          <Loading
+            image={require('assets/images/agave_wallet_create.png')}
+            text="Wallet is being created, please wait a moment"
+          />
         )}
       </BodyBox>
     </PageContainer>
   );
 };
+
+//   <Button onClick={goHome} secondary>
+//     Done
+//   </Button>;
+
+const BodyBox = styled.View`
+  height: 100%;
+  width: 100%;
+`;
+const CreatedContainer = styled.View`
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+`;
+const ContainerText = styled.View`
+  width: 100%;
+  padding: 0 22px;
+  margin-bottom: 35px;
+  align-items: flex-start;
+`;
+
 const Title = styled(BaseTitle)`
   margin-bottom: 16px;
   font-size: 32px;
   position: relative;
   right: 8px;
-`;
-const BodyBox = styled.ScrollView`
-  height: 100%;
-  width: 100%;
-`;
-const Image = styled.Image`
-  width: 100%;
-  height: 100%;
-  resize-mode: contain;
-`;
-const ImageBox = styled.View`
-  width: 30%;
-  height: 20%;
-  margin-bottom: 16px;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid red;
-`;
-
-const ContainerText = styled.View`
-  width: 100%;
-  padding-left: 8px;
-  margin-bottom: 35px;
-  align-items: flex-start;
-`;
-const ContainerButtons = styled.View`
-  width: 100%;
-  align-items: center;
+  align-self: center;
 `;
