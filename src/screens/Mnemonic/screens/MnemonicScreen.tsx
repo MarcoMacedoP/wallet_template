@@ -48,7 +48,7 @@ export const MnemonicScreen = ({navigation}) => {
 
       <Modal
         isShowed={state.modalVisible}
-        icon={webcam}
+        image={webcam}
         onClose={() => {
           Toast.show('Modal has been closed.', Toast.SHORT);
         }}>

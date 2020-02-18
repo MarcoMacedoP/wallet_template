@@ -40,6 +40,8 @@ target 'wallet_template' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'wallet_templateTests' do
     inherit! :search_paths
     # Pods for testing
