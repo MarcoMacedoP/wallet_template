@@ -3,12 +3,17 @@ import {Modal as NativeModal, Dimensions} from 'react-native';
 import {colors} from 'shared/styles';
 import styled from 'styled-components/native';
 
-interface ModalProps {
+type ModalProps = {
   isShowed: boolean;
   onClose: () => void;
   icon?: string;
-}
-
+};
+/**
+ *  A component to manage modals through app.
+ *  @param  isShowed indicates if modal is showed
+ *  @param onClose a function to be called when the modal closes.
+ *  @param icon (optional) an icon showed in the top of modal
+ */
 export const Modal: React.FC<ModalProps> = ({
   isShowed,
   onClose,
