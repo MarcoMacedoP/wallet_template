@@ -11,7 +11,7 @@ export const BalanceHeaderComponent: React.FC<BalanceHeaderComponentProps> = ({
   const [isHiddenValues, setIsHiddenValues] = useState(false);
 
   return (
-    <Container source={require('../../../assets/images/agave_background.png')}>
+    <Container source={require('assets/images/agave_background.png')}>
       <AssetsContainer>
         <Title>{assets}</Title>
         <SmallText>$</SmallText>
