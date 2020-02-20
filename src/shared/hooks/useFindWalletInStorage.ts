@@ -20,12 +20,9 @@ export function useFindWalletInStorage() {
         const adress = await getAdress();
 
         setAddresses(adress);
-        console.log({addresses});
-
         setKeystore(keystore);
         setLoading(false);
       } catch (error) {
-        console.error(error);
         setLoading(false);
         setKeystore(null);
       }
