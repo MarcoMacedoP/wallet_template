@@ -23,7 +23,7 @@ export function useCreateWallet() {
         setError(error);
       }
     }
-    createWallet();
+    !isCreated && createWallet();
   }, []);
 
   return {error, isCreated};
@@ -37,10 +37,11 @@ async function createKeystore() {
 }
 async function createAddress() {
   const address = await Wallet.generateAddress();
+  const mainAddress = address[0].address;
   Wallet.address = address;
   await AsyncStorage.setItem('addresses', JSON.stringify(address));
-  await AsyncStorage.setItem('mainAddress', JSON.stringify(address[0]));
-  console.log({address: true});
+  await AsyncStorage.setItem('mainAddress', JSON.stringify(mainAddress));
+  console.log({mainAddress});
 }
 async function encodeKeystore() {
   const json = await Wallet.encodeJson();

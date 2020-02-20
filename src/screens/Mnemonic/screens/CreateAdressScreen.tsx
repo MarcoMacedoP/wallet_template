@@ -17,7 +17,7 @@ export const CreateAdressScreen = () => {
   const {isCreated, error} = useCreateWallet();
   useEffect(() => {
     if (isCreated) {
-      setTimeout(goBalance, 300);
+      setTimeout(goBalance, 800);
     } else if (error) {
       Toast.show(error);
     }
