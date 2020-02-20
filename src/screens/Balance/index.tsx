@@ -25,6 +25,7 @@ const CURRENCYS: Array<CurrencyType> = [
 
 export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
   const [keystore] = useGlobalState('keystore');
+
   const handleCurrencyClick = currency =>
     navigation.navigate('Transfers', {screen: 'home', params: {currency}});
 
@@ -32,8 +33,8 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
 
   useEffect(() => {
     async function getBalance() {
-      const data = await Wallet.getBalance();
-      console.log({data});
+      // const data = await Wallet.getTokenAddress();
+      // console.log({data});
     }
     getBalance();
   }, []);
