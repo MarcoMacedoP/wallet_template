@@ -1,7 +1,7 @@
 import {createGlobalState} from 'react-hooks-global-state';
 
 type addressesType = Array<{
-  adress: string;
+  address: string;
   eth: number;
   token: number;
 }>;

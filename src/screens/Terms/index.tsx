@@ -41,9 +41,9 @@ export const TermsScreen = ({ route,  navigation }) => {
                     setCount(1);
                   }
                 }}>
-              <TouchableOpacity style={styles.dotBlueRound}>
+              <View style={styles.dotBlueRound}>
                 <View style={count == 1 ? styles.dotBlue : styles.dotGray}></View>
-              </TouchableOpacity>
+              </View>
               <LabelGreen>I agree to the above terms  </LabelGreen>
             </TouchableOpacity>
             {count == 1 ?

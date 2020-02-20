@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {Image, Dimensions, View, Text} from 'react-native';
+import {Image, Dimensions, View, Text, Share} from 'react-native';
 import {colors} from '../styles';
 import {useNavigation} from '@react-navigation/native';
 import { Label } from 'shared/styled-components';
@@ -26,6 +26,7 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
 // export const LayoutHeader = (props: any) => {
   const navigation = useNavigation();
   const [modalAdd, setModalAdd] = useGlobalState('modalAdd');
+  const [addresses,] = useGlobalState('addresses');
   const handlePressNotifications = () => navigation.navigate('Notifications');
   const handlePressBack = () => navigation.goBack();
   const renderLeftIcon = () => {
@@ -46,6 +47,27 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
     else
     return  null;
   }
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: addresses[0].address,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   return light == false ? (
     <Container light={light}>
@@ -79,6 +101,8 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
             navigation.navigate('Transfers', {screen: 'address'});
           } else if(rightIcon == 'add') {
             setModalAdd(!modalAdd) 
+          } else {
+            onShare();
           }
         }}
         underlayColor={colors.white}>
@@ -107,11 +131,11 @@ const Container = styled.View<StyleProps>`
 const LogoImage = styled.Image`
   margin: 0 auto;
 `;
-const NotificationsIcon = styled.TouchableHighlight`
+const NotificationsIcon = styled.TouchableOpacity`
   padding: 8px;
   border-radius: 32px;
 `;
-const Shared = styled.TouchableHighlight`
+const Shared = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   padding: 8px;
