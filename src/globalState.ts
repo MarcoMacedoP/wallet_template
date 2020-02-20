@@ -1,15 +1,17 @@
 import {createGlobalState} from 'react-hooks-global-state';
 
-type addressesType = Array<{
+export type adressType = {
   address: string;
   eth: number;
   token: number;
-}>;
+};
+
 type globalState = {
   keystore: any;
   modalAdd: boolean;
   modalQR: boolean;
-  addresses: addressesType;
+  addresses: Array<adressType>;
+  mainAddress: adressType;
   contactsQuantity: 0;
 };
 
@@ -19,4 +21,5 @@ export const {useGlobalState} = createGlobalState<globalState>({
   modalQR: false,
   addresses: [],
   contactsQuantity: 0,
+  mainAddress: undefined,
 });

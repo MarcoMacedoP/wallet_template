@@ -7,6 +7,7 @@ import {CurrencyType} from 'shared/types';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import {useGlobalState} from 'globalState';
 import Wallet from 'erc20-wallet';
+import {useGetBalance} from './hooks/useGetBalance';
 
 const CURRENCYS: Array<CurrencyType> = [
   {
@@ -24,20 +25,13 @@ const CURRENCYS: Array<CurrencyType> = [
 ];
 
 export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
-  const [keystore] = useGlobalState('keystore');
+  const [mainAdress] = useGlobalState('mainAddress');
+  const {ethBalance, generalBalance, tokenBalance} = useGetBalance(mainAdress);
 
   const handleCurrencyClick = currency =>
     navigation.navigate('Transfers', {screen: 'home', params: {currency}});
 
   const goNotifications = () => navigation.navigate('Notifications');
-
-  useEffect(() => {
-    async function getBalance() {
-      // const data = await Wallet.getTokenAddress();
-      // console.log({data});
-    }
-    getBalance();
-  }, []);
 
   const config = {
     velocityThreshold: 0.3,
@@ -52,7 +46,7 @@ export const BalanceScreen = ({navigation, currencys = CURRENCYS}) => {
         style={{
           flex: 1,
         }}>
-        <BalanceHeaderComponent assets="0.00" />
+        <BalanceHeaderComponent assets={generalBalance} />
         <CurrencysContainer>
           {currencys.map((currency, index) => (
             <BalanceCurrencyComponent

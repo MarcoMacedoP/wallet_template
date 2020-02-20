@@ -17,9 +17,8 @@ export function useFindWalletInStorage() {
     async function getWallet() {
       try {
         const keystore = await getDecodedWallet();
-        const adress = await getAdress();
-
-        setAddresses(adress);
+        const address = await getAdress();
+        setAddresses(address);
         setKeystore(keystore);
         setLoading(false);
       } catch (error) {
