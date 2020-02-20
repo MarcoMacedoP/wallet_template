@@ -21,16 +21,8 @@ export const CreateAdressScreen = () => {
     } else if (error) {
       Toast.show(error);
     }
-<<<<<<< HEAD
   }, [isCreated, error]);
   const goBalance = () => navigation.navigate('Balance');
-=======
-    createWallet().then(goBalance);
-  }, []);
-  const goBalance = () => {
-    navigation.navigate('Balance')
-  };
->>>>>>> e1212f30715979f2a0e0a6185dbe62b9d006dcc4
 
   return (
     <PageContainer light>
