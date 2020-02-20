@@ -13,7 +13,9 @@ export function MnemonicRoutes({route}) {
       screenOptions={{headerShown: false}}>
       <Mnemonic.Screen name="Mnemonic" component={MnemonicScreen} />
       <Mnemonic.Screen name="Backup" component={BackupScreen} />
-      <Mnemonic.Screen name="CreateAdress" component={CreateAdressScreen} />
+      <Mnemonic.Screen name="CreateAdress" component={CreateAdressScreen} options={{
+        headerShown:false,
+      }} />
     </Mnemonic.Navigator>
   );
 }

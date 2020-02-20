@@ -56,7 +56,9 @@ export const CreateAdressScreen = () => {
     }
     createWallet().then(goBalance);
   }, []);
-  const goBalance = () => navigation.navigate('Balance');
+  const goBalance = () => {
+    navigation.navigate('Balance')
+  };
 
   return (
     <PageContainer light>
