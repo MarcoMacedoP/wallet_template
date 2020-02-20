@@ -11,13 +11,17 @@ import Wallet from 'erc20-wallet';
 export function useFindWalletInStorage() {
   const [isLoading, setLoading] = useState(false);
   const [, setKeystore] = useGlobalState<any>('keystore');
+  const [addresses, setAddresses] = useGlobalState('addresses');
   useEffect(() => {
     setLoading(true);
     async function getWallet() {
       try {
         const keystore = await getDecodedWallet();
         const adress = await getAdress();
-        console.log(adress);
+
+        setAddresses(adress);
+        console.log({addresses});
+
         setKeystore(keystore);
         setLoading(false);
       } catch (error) {
