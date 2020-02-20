@@ -2,24 +2,9 @@
 
 ## How to make this projects works
 
-1.  npm install
-2.  go to /node_modules/bitcore-lib/index.js
-3.  comment version check at bitcore.versionGuard <br>
+1.  `npm install && node configScript.js`
+2.  `npm start`
 
-```
-    // module information
-    bitcore.version = 'v' + require('./package.json').version;
-    // bitcore.versionGuard = function(version) {
-    // if (version !== undefined) {
-    // var message = 'More than one instance of bitcore-lib found. ' +
-    // 'Please make sure to require bitcore-lib and check that submodules do' +
-    // ' not also include their own bitcore-lib dependency.';
-    // throw new Error(message);
-    // }
-    // };
-    // bitcore.versionGuard(global.\_bitcore);
-```
-4. ```./node_modules/.bin/rn-nodeify --hack --install ```
           <p>
             <a href="https://travis-ci.org/react-native-community/react-native-template-typescript">
               <img alt="Build Status" src="https://img.shields.io/travis/react-native-community/react-native-template-typescript.svg" target="_blank" />

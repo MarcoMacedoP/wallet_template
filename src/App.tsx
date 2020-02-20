@@ -43,7 +43,8 @@ function useInitilizeApp() {
 const App = () => {
   const {isLoading} = useFindWalletInStorage();
   const hasInitialized = useInitilizeApp();
-  return isLoading && !hasInitialized ? (
+  useEffect(() => console.log({isLoading}), [isLoading]);
+  return isLoading || !hasInitialized ? (
     <Splash />
   ) : (
     <FadeInView style={{flex: 1}}>
