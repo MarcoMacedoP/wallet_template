@@ -51,7 +51,7 @@ export const LayoutHeader: React.FC<LayoutProps> = ({
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: 'alkdjshflaskjdfhlkasjh'
+        message: addresses[0].address,
       });
 
       if (result.action === Share.sharedAction) {
